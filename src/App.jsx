@@ -13,10 +13,9 @@ export default function App() {
           <Route path="/gallery"></Route>
           <Route path="/login"></Route>
           <Route path="/register"></Route>
+          <Route path="/profile"></Route>
+          <Route path="/cart"></Route>
           <Route path="#"></Route>
-          <Route path="#"></Route>
-          <Route path="#"></Route>
-
         </Routes>
       </Container>
     </>
