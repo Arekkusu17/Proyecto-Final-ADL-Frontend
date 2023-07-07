@@ -1,16 +1,16 @@
 /* eslint-disable react/prop-types */
 import { Box } from "@mui/system";
-import { List, ListItem, ListItemText, ListItemButton, ListItemIcon } from "@mui/material"
+import { List, ListItem, ListItemText, ListItemButton } from "@mui/material"
 import { NavLink } from "react-router-dom"
 
 
-export default function NavListDrawer({ publicNavLinks, privateNavLinks, setOpen }) {
+export default function NavListDrawer({ NavLinks, setOpen }) {
   return (
     <Box >
       <nav>
         <List>
           {
-            publicNavLinks.map(item => (
+            NavLinks.map(item => (
               <ListItem key={item.title}>
                 <ListItemButton
                   component={NavLink}
@@ -21,14 +21,6 @@ export default function NavListDrawer({ publicNavLinks, privateNavLinks, setOpen
               </ListItem>
             ))
           }
-
-          {/* <ListItem>
-            <ListItemButton component="a" href="#ds">
-              <ListItemIcon>
-                <ShoppingCartIcon></ShoppingCartIcon>
-              </ListItemIcon>
-            </ListItemButton>
-          </ListItem> */}
         </List>
       </nav>
     </Box>

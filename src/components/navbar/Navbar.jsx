@@ -1,40 +1,48 @@
 import { useState } from "react";
 import { Box } from "@mui/system"
-import { Container, CssBaseline, Button, Drawer, AppBar, Toolbar, IconButton, Typography } from "@mui/material"
+import { Container, Button, Drawer, AppBar, Toolbar, IconButton, Typography } from "@mui/material"
 import { NavLink } from "react-router-dom"
 
 import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-
 import NavListDrawer from "./NavListDrawer";
+import CartDrawer from "../menuCart/CartDrawer";
 
 const publicNavLinks = [
   {
     title: "Galeria",
-    path: "gallery"
+    path: "/gallery"
   },
   {
     title: "Iniciar Sesion",
-    path: "login"
+    path: "/login"
   }, {
     title: "Registrarse",
-    path: "register"
+    path: "/register"
   }
 ]
 
 const privateNavLinks = [
   {
+    title: "Galeria",
+    path: "/gallery"
+  },
+  {
     title: "Perfil",
-    path: "#profile"
+    path: "/profile"
   },
   {
     title: "Cerrar Sesion",
-    path: "#logout"
+    path: "/logout"
   }
 ]
 const activeStyle = {
-  color: '#E8D5C4',
+  color: '#E8D5C4'
 };
+
+// TODO validacion de usuario existente y conectado
+const user = true
+
+const navLinks = user ? privateNavLinks : publicNavLinks
 
 const activeLink = ({ isActive }) => (isActive ? activeStyle : { color: '#EEEEEE' });
 
@@ -44,11 +52,10 @@ export default function Navbar() {
 
   return (
     <>
-      <CssBaseline />
 
-      <AppBar position="fixed" sx={{ bgcolor: '#3A98B9' }}>
+      <AppBar position="fixed" sx={{ bgcolor: 'primary' }}>
         <Container>
-          <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
             <IconButton
               color="inherit"
               size="large"
@@ -60,15 +67,14 @@ export default function Navbar() {
               />
             </IconButton>
             <Typography
-              sx={{ flexGrow: 0.8, textDecoration: 'none', color: 'inherit' }}
+              sx={{ flexGrow: 0.5, textDecoration: 'none', color: 'inherit' }}
               variant="h5"
               component={NavLink}
               to={"/"}
             >Logo</Typography>
-
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <Box sx={{ display: { xs: "none", sm: "flex" } }}>
               {
-                publicNavLinks.map(item => (
+                navLinks.map(item => (
                   <Button
                     color="inherit"
                     key={item.title}
@@ -82,15 +88,7 @@ export default function Navbar() {
                 ))
               }
             </Box>
-            <IconButton
-              color="inherit"
-              size="large"
-              edge="start"
-              aria-label="menu"
-              onClick={() => { setOpen(true) }}>
-              <ShoppingCartIcon
-              />
-            </IconButton>
+            <CartDrawer />
           </Toolbar>
         </Container>
       </AppBar >
@@ -100,9 +98,9 @@ export default function Navbar() {
         open={open}
         anchor="top"
         onClose={() => setOpen(false)}
-        sx={{ display: { xs: "block", sm: "none" } }}
+        sx={{ display: { xs: "block", sm: "none" }, height: 10 }}
       >
-        <NavListDrawer publicNavLinks={publicNavLinks} privateNavLinks={privateNavLinks} setOpen={setOpen} />
+        <NavListDrawer NavLinks={navLinks} />
       </Drawer>
     </>
   )
