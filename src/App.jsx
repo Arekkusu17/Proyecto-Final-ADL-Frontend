@@ -1,13 +1,13 @@
-import { Container } from "@mui/material"
-import { Route, Routes } from "react-router-dom"
-import Navbar from "./components/navbar/Navbar"
+import { Container } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/navbar/Navbar";
+import Footer from "./components/navbar/footer";
 
 export default function App() {
   return (
-
     <>
       <Navbar />
-      <Container>
+      <Container maxWidth="lg">
         <Routes>
           <Route path="/"></Route>
           <Route path="/gallery"></Route>
@@ -18,7 +18,7 @@ export default function App() {
           <Route path="#"></Route>
         </Routes>
       </Container>
+      <Footer />
     </>
-
-  )
+  );
 }
