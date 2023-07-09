@@ -18,7 +18,8 @@ export default function Footer() {
               Logo
             </Typography>
             <Typography variant="tbody1" sx={{ pr: 4 }} textAlign="center">
-              ¡Clases Personalizadas: Tu aprendizaje a tu ritmo!
+              Conecta, Aprende, Comparte: Tu plataforma segura para clases face
+              to face
             </Typography>
           </Box>
           <Box sx={{ flexGrow: 1, flexBasis: 0 }} textAlign="center">
