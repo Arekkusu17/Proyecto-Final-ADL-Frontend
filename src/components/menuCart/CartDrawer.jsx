@@ -1,4 +1,4 @@
-import { Button, Container, Drawer, IconButton, Typography } from "@mui/material";
+import { Button, Container, Drawer, IconButton, Toolbar, Typography } from "@mui/material";
 import { useState } from "react";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import CartItemDrawer from "./CartItemDrawer";
@@ -31,7 +31,13 @@ export default function MenuCart() {
         open={openMenuCart}
         anchor="right"
         onClose={handleCloseDrawerCart}
+        sx={{
+          width: 'auto',
+          flexShrink: 0,
+          [`& .MuiDrawer-paper`]: { width: 'auto', boxSizing: 'border-box', pt: '1rem' },
+        }}
       >
+        <Toolbar />
         <Container >
           <Typography variant="h5">Carro [{"cantidad"}]</Typography>
           <CartItemDrawer />
@@ -41,6 +47,6 @@ export default function MenuCart() {
           <Button variant="contained" endIcon={<KeyboardArrowRight />} color="success" component={NavLink} to="/cart" onClick={handleCloseDrawerCart} sx={{ width: '100%' }}>Pagar</Button>
         </Container>
       </Drawer>
-    </div >
+    </div>
   );
 }
