@@ -37,7 +37,9 @@ const privateNavLinks = [
   },
   {
     title: "Perfil",
-    path: "/profile",
+
+    path: "/dashboard"
+
   },
   {
     title: "Cerrar Sesion",
@@ -61,9 +63,12 @@ export default function Navbar() {
 
   return (
     <>
-      <AppBar position="static" sx={{ bgcolor: "primary" }}>
-        <Container maxWidth="lg">
-          <Toolbar sx={{ display: "flex", justifyContent: "space-around" }}>
+
+
+      <AppBar position="sticky" sx={{ bgcolor: 'primary', zIndex: (theme) => theme.zIndex.drawer + 1 }} >
+        <Container>
+          <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
+
             <IconButton
               color="inherit"
               size="large"
@@ -99,16 +104,11 @@ export default function Navbar() {
             <CartDrawer />
           </Toolbar>
         </Container>
+
+
       </AppBar>
 
-      {/* <Button
-        variant="contained"
-        onClick={() => {
-          setOpen(true);
-        }}
-      >
-        Open
-      </Button> */}
+
       <Drawer
         open={open}
         anchor="top"
