@@ -1,4 +1,4 @@
-import { Box, Container, Paper, Stack, Typography } from "@mui/material";
+import { Container, Stack, Typography } from "@mui/material";
 import PublicationListItem from "../components/publications/publicationListItem";
 
 export default function MyPosts() {

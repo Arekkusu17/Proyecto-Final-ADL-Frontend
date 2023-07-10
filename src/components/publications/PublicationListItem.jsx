@@ -20,8 +20,8 @@ export default function PublicationListItem() {
           <Typography variant="h4" align="center">Precio</Typography>
           <Stack direction='row' >
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
-              <Button color='primary'><PreviewIcon color="light" /></Button>
-              <Button color='warning'><EditIcon color="light" /></Button>
+              <Button color='dark'><PreviewIcon color="light" /></Button>
+              <Button color='primary'><EditIcon color="light" /></Button>
               <Button color='danger'><ClearIcon color="light" /></Button>
             </ButtonGroup>
           </Stack>
