@@ -20,6 +20,12 @@ const theme = createTheme({
     danger: {
       main: "#FF2171",
     },
+    warning: {
+      main: "#E7B10A",
+    },
+    light: {
+      main: "#EEEEEE",
+    },
     dark: {
       main: "#001C30",
     },
