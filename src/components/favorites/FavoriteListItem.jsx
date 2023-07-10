@@ -11,7 +11,7 @@ export default function FavoriteListItem() {
         alignItems="center"
         justifyContent="space-around"
         gap="0.5rem"
-        sx={{ flexDirection: { xs: 'column', sm: 'row' } }}>
+        sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
         <Avatar variant="square" sx={{ width: '150px', height: '150px', bgcolor: 'pink' }} />
         <Stack alignContent='flex-start'>
           <Typography>Title</Typography>
