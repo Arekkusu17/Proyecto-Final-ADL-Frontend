@@ -51,7 +51,7 @@ const activeStyle = {
 // TODO validacion de usuario existente y conectado
 const user = true;
 
-const navLinks = user ? privateNavLinks : publicNavLinks;
+const navLinks = !user ? privateNavLinks : publicNavLinks;
 
 const activeLink = ({ isActive }) =>
   isActive ? activeStyle : { color: "#EEEEEE" };
