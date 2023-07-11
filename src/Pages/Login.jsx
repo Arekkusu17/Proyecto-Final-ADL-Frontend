@@ -1,22 +1,32 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
+  const { saveToken } = useContext(AuthContext)
 
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
+  const navigate = useNavigate()
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Password:", password);
+    const res = await fetch(`https://api.escuelajs.co/api/v1/auth/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+    const data = await res.json();
+    await saveToken(data.access_token);
+    navigate("/dashboard");
+
   };
 
   return (
@@ -29,16 +39,17 @@ export default function Login() {
             </Typography>
             <TextField
               label="Email"
-              type="email"
-              value={email}
-              onChange={handleEmail}
+              type="text"
+              value={email || ''}
+              placeholder="Email ..."
+              onChange={(e) => { setEmail(e.target.value) }}
               fullWidth
             />
             <TextField
               label="Password"
               type="password"
-              value={password}
-              onChange={handlePassword}
+              value={password || ''}
+              onChange={(e) => { setPassword(e.target.value) }}
               fullWidth
             />
             <Button type="submit" variant="contained" color="primary">
