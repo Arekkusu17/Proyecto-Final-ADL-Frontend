@@ -17,17 +17,17 @@ import { SaleUseContext } from "../../Context/SaleContext";
 
 export default function MenuCart() {
   const [openMenuCart, setopenMenuCart] = useState(false);
+  const { total } = SaleUseContext();
 
-  const { total, agregarClase, eliminarClase } = SaleUseContext();
   const data = JSON.parse(localStorage.getItem("product"));
   let totalAmount = 0;
+
   if (data) {
     for (const product of data.products) {
       if (product.amount && typeof product.amount === "number") {
         totalAmount += product.amount;
       }
     }
-    console.log("La cantidad total de todas las clases es: " + totalAmount);
   }
 
   const handleOpenDrawerCart = () => {
@@ -60,12 +60,22 @@ export default function MenuCart() {
       >
         <Toolbar />
         <Container>
-          <Typography variant="h5">Carro [{"cantidad"}]</Typography>
+          <Typography variant="h5" sx={{ mb: 3 }}>
+            Carro de Compra
+          </Typography>
           {data.products.map((product) => (
             <Box key={product.id}>
               <CartItemDrawer product={product} />
             </Box>
           ))}
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography variant="h5" sx={{ mt: 3 }}>
+              Total
+            </Typography>
+            <Typography variant="h5" sx={{ mt: 3 }}>
+              $ {total.toLocaleString("es-CL")}
+            </Typography>
+          </Box>
           <Button
             variant="contained"
             endIcon={<KeyboardArrowRight />}
@@ -73,7 +83,7 @@ export default function MenuCart() {
             component={NavLink}
             to="/cart"
             onClick={handleCloseDrawerCart}
-            sx={{ width: "100%" }}
+            sx={{ width: "100%", mt: 3 }}
           >
             Pagar
           </Button>
