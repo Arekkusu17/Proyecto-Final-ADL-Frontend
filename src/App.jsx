@@ -1,20 +1,18 @@
-
 import { Container } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/Footer";
 import Home from "./Pages/Home";
 import Gallery from "./Pages/Gallery";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import InfoClase from "./Pages/InfoClase";
-import Dashboard from "./pages/Dashboard"
-import Profile from "./pages/Profile"
-import EditProfile from "./pages/EditProfile"
-import Favorites from "./pages/Favorites"
-import CreatePost from "./pages/CreatePost"
-import MyPosts from "./pages/MyPosts"
-
+import Dashboard from "./pages/Dashboard";
+import Profile from "./pages/Profile";
+import EditProfile from "./pages/EditProfile";
+import Favorites from "./pages/Favorites";
+import CreatePost from "./pages/CreatePost";
+import MyPosts from "./pages/MyPosts";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -40,7 +38,5 @@ export default function App() {
       </Container>
       <Footer />
     </>
-
   );
 }
-
