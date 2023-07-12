@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { SaleUseContext } from "../../Context/SaleContext";
+import { SaleUseContext } from "../../context/SaleContext";
 import { useEffect } from "react";
 
 export default function CartItemDrawer({ product }) {
@@ -27,7 +27,7 @@ export default function CartItemDrawer({ product }) {
     eliminarClase(id);
   };
 
-  useEffect(() => {}, [total]);
+  useEffect(() => { }, [total]);
 
   return (
     <>
