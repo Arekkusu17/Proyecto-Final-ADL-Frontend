@@ -27,6 +27,7 @@ import { useContext } from "react";
 
 export default function App() {
   const { loading, user } = useContext(AuthContext);
+  // if (user === null) return <div>Loading...</div>;
 
   return (
     <>
@@ -42,7 +43,7 @@ export default function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/profile"></Route>
             <Route path="/cart"></Route>
-            <Route path="/dashboard" element={user && !loading ? <Dashboard /> : <Navigate to="/" />}>
+            <Route path="/dashboard" element={user && !loading ? <Dashboard /> : <Navigate to="/login" />}>
               <Route path="profile" element={<Profile />} />
               <Route path="editprofile" element={<EditProfile />} />
               <Route path="favorites" element={<Favorites />} />

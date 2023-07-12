@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 
 export const AuthContext = createContext();
 
@@ -10,13 +10,6 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(initialStateToken);
   const [loading, setLoading] = useState(false);
 
-  const login = () => {
-    if (token) {
-      getProfileUser(token);
-    } else {
-      setUser(false);
-    }
-  }
   const getProfileUser = async (access_token) => {
     try {
       const res = await fetch(`https://api.escuelajs.co/api/v1/auth/profile`, {
@@ -26,8 +19,10 @@ const AuthProvider = ({ children }) => {
         },
       });
       const data = await res.json();
-      if (data.statusCode) throw new Error("Login invalido")
+      console.log(data)
+      // if (data.statusCode) throw new Error("Login invalido")
       setUser(data);
+      console.log("user:", user, data)
     } catch (error) {
       console.log(error)
       setUser(false);
@@ -40,6 +35,7 @@ const AuthProvider = ({ children }) => {
       setToken(access_token);
       await getProfileUser(access_token);
       localStorage.setItem("token", access_token);
+      // await login()
     } catch (error) {
       console.log(error);
     } finally {
@@ -51,11 +47,13 @@ const AuthProvider = ({ children }) => {
     setUser(false);
     setToken(null);
     localStorage.removeItem("token");
+
   };
+
 
   return (
     <AuthContext.Provider
-      value={{ saveToken, user, token, getProfileUser, loading, logout, login }}
+      value={{ saveToken, user, setUser, token, getProfileUser, loading, logout }}
     >
       {children}
     </AuthContext.Provider>

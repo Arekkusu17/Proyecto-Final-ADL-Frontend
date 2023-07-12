@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { SaleUseContext } from "../Context/SaleContext";
+import { SaleUseContext } from "../context/SaleContext";
 import { useState } from "react";
 
 export default function CardInfo({ clases }) {

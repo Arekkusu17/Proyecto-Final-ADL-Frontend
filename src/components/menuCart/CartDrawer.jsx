@@ -13,7 +13,7 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CartItemDrawer from "./CartItemDrawer";
 import { KeyboardArrowRight } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
-import { SaleUseContext } from "../../Context/SaleContext";
+import { SaleUseContext } from "../../context/SaleContext";
 
 export default function MenuCart() {
   const [openMenuCart, setopenMenuCart] = useState(false);
