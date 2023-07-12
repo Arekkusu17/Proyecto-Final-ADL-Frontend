@@ -1,35 +1,51 @@
 import { Box, Button, Paper, TextField, Typography } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { saveToken, login } = useContext(AuthContext)
+  const { saveToken, token, getProfileUser, setUser } = useContext(AuthContext)
 
   const navigate = useNavigate()
 
+  useEffect(() => {
+    if (token) {
+      getProfileUser(token);
+    } else {
+      setUser(false);
+    }
+  }, [])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await fetch(`https://api.escuelajs.co/api/v1/auth/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-    if (res.ok === false) {
-      console.log("error de credenciales")
-    } else {
-      const data = await res.json();
-      await saveToken(data.access_token);
-      login();
-      navigate("/dashboard");
+    try {
+      const res = await fetch(`https://api.escuelajs.co/api/v1/auth/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
+      if (res.ok === false) {
+        console.log("error de credenciales")
+      } else {
+        try {
+          const data = await res.json();
+          await saveToken(data.access_token);
+          navigate("/dashboard")
+        } catch (error) {
+          console.log(error)
+        }
+      }
+    } catch (error) {
+      console.log(error)
     }
   };
 

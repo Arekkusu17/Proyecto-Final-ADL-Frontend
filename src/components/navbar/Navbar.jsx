@@ -18,7 +18,10 @@ import NavListDrawer from "./NavListDrawer";
 import CartDrawer from "../menuCart/CartDrawer";
 
 import { AuthContext } from "../../context/AuthProvider";
-import { SaleUseContext } from "../../Context/SaleContext";
+import { SaleUseContext } from "../../context/SaleContext";
+
+import { useNavigate } from "react-router-dom";
+
 
 
 const publicNavLinks = [
@@ -66,6 +69,7 @@ export default function Navbar() {
   const { user, logout } = useContext(AuthContext)
 
   const navLinks = !user ? publicNavLinks : privateNavLinks;
+  const navigate = useNavigate()
 
   return (
     <>
@@ -109,7 +113,10 @@ export default function Navbar() {
                   color="inherit"
                   key={item.title}
                   sx={{ mx: "0.5rem" }}
-                  onClick={() => logout()}
+                  onClick={() => {
+                    logout();
+                    navigate("/");
+                  }}
                 >
                   {item.title}
                 </Button>
