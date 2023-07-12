@@ -40,17 +40,22 @@ const theme = createTheme({
 
 import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
+
+import AuthProvider from "./context/AuthProvider.jsx";
 import SaleContextProvider from "./Context/SaleContext.jsx";
+ 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <SaleContextProvider>
-      <CssBaseline />
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <App />
-        </ThemeProvider>
-      </BrowserRouter>
+      <AuthProvider>
+        <CssBaseline />
+        <BrowserRouter>
+          <ThemeProvider theme={theme}>
+            <App/>
+          </ThemeProvider>
+        </BrowserRouter>
+      </AuthProvider>
     </SaleContextProvider>
   </React.StrictMode>
 );

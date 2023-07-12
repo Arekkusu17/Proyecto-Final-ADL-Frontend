@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Box } from "@mui/system";
 import {
   Container,
@@ -16,7 +16,10 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import NavListDrawer from "./NavListDrawer";
 import CartDrawer from "../menuCart/CartDrawer";
+
+import { AuthContext } from "../../context/AuthProvider";
 import { SaleUseContext } from "../../Context/SaleContext";
+
 
 const publicNavLinks = [
   {
@@ -52,10 +55,6 @@ const activeStyle = {
   color: "#E8D5C4",
 };
 
-// TODO validacion de usuario existente y conectado
-const user = true;
-
-const navLinks = !user ? privateNavLinks : publicNavLinks;
 
 const activeLink = ({ isActive }) =>
   isActive ? activeStyle : { color: "#EEEEEE" };
@@ -63,6 +62,10 @@ const activeLink = ({ isActive }) =>
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { total } = SaleUseContext();
+
+  const { user, logout } = useContext(AuthContext)
+
+  const navLinks = !user ? publicNavLinks : privateNavLinks;
 
   return (
     <>
@@ -91,7 +94,7 @@ export default function Navbar() {
               Logo
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-              {navLinks.map((item) => (
+              {navLinks.map((item) => (item.path !== "/logout" ?
                 <Button
                   color="inherit"
                   key={item.title}
@@ -99,6 +102,14 @@ export default function Navbar() {
                   to={item.path}
                   style={activeLink}
                   sx={{ mx: "0.5rem" }}
+                >
+                  {item.title}
+                </Button> :
+                <Button
+                  color="inherit"
+                  key={item.title}
+                  sx={{ mx: "0.5rem" }}
+                  onClick={() => logout()}
                 >
                   {item.title}
                 </Button>

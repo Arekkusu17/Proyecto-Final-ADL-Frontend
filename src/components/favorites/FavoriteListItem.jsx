@@ -4,7 +4,8 @@ import ClearIcon from '@mui/icons-material/Clear';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 
-export default function FavoriteListItem() {
+export default function FavoriteListItem(favoriteItem) {
+
   return (
     <Box component={Paper} elevation={6} padding='1rem'>
       <Stack
@@ -14,7 +15,7 @@ export default function FavoriteListItem() {
         sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
         <Avatar variant="square" sx={{ width: '150px', height: '150px', bgcolor: 'pink' }} />
         <Stack alignContent='flex-start'>
-          <Typography>Title</Typography>
+          <Typography>{favoriteItem.id}</Typography>
           <Typography>Categorie</Typography>
         </Stack>
         <Stack>

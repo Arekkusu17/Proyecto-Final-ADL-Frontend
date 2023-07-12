@@ -1,11 +1,14 @@
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
 export default function EditProfile() {
 
   // TODO LA INFO DEL USER DEBE VENIR DE UN PROVIDER, EL MISMO QUE ES UTIL PARA LA VIEW PERFIL
 
-  const user = { name: 'Peter Parker', lastname: 'Parker', user: 'peterparker@gmail.com' }
+  // const user = { name: 'Peter Parker', lastname: 'Parker', user: 'peterparker@gmail.com' }
+  const { user } = useContext(AuthContext)
+
 
   const [userDetails, setUserDetails] = useState(user)
 
@@ -14,7 +17,6 @@ export default function EditProfile() {
 
   const updateUserDetails = async (e) => {
     e.preventDefault();
-
 
     try {
       // Funciones para actualizar 
@@ -38,14 +40,14 @@ export default function EditProfile() {
             onChange={(e) => setUserDetails({ ...userDetails, name: e.target.value })}
           />
           <TextField
-            value={userDetails?.lastname || ''}
+            value={userDetails?.role || ''}
             label="Apellidos"
             type="text"
             placeholder="Apellidos..."
-            onChange={(e) => setUserDetails({ ...userDetails, lastname: e.target.value })}
+            onChange={(e) => setUserDetails({ ...userDetails, role: e.target.value })}
           />
           <TextField
-            value={userDetails?.user || ''}
+            value={userDetails?.email || ''}
             label="Email"
             type="email"
             placeholder="Email..."
