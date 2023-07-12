@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 // import axios from "axios"
 
 export const FavoritesContext = React.createContext()
@@ -13,16 +13,15 @@ const FavoritesProvider = ({ children }) => {
       const res = await fetch("/Favorites.json");
       const data = await res.json();
       setFavorites(data);
-      console.log(data)
     } catch (error) {
       console.log(error);
     }
   }
 
-  useEffect(() => { getFavorites() }, [])
+
 
   return (
-    <FavoritesContext.Provider value={{ favorites, setFavorites }}>
+    <FavoritesContext.Provider value={{ favorites, setFavorites, getFavorites }}>
       {children}
     </FavoritesContext.Provider>
   )

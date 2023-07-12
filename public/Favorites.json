@@ -10,13 +10,13 @@
   "horario":"Todos los dias"
 },
 {
-  "desc": "5 Clases de matematicas para media y basica de 45 min 5 Clases de matematicas para media y basica de 45 min 5 Clases de matematicas para media y basica de 45 min",
-  "id": "mate002",
-  "img": "/public/img/mate1.jpg",
-  "name": "Clases Matematica basica/media",
-  "price": 50000,
-  "id_usu": 1,
-  "materia": "Matematicas",
-  "nivel": "Basica/Media",
-  "horario":"Todos los dias"
+  "desc": "10 clases de ingles",
+  "id": "ingles001",
+  "img": "/public/img/ingles1.jpg",
+  "name": "Ingles basico/medio/avanzado",
+  "price": 90000,
+  "id_usu": 2,
+  "asignatura": "Ingles",
+  "nivel": "Todos",
+  "horario":"semana"
 }]
