@@ -10,7 +10,11 @@ export default function Footer() {
     <>
       <AppBar
         position="static"
-        sx={{ bgcolor: "primary", height: 200, color: "black" }}
+        sx={{
+          bgcolor: "primary",
+          height: 180,
+          color: "black",
+        }}
       >
         <Container sx={{ display: "flex", margin: "0 auto" }}>
           <Box sx={{ flexGrow: 1, flexBasis: 0 }}>

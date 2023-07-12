@@ -1,4 +1,3 @@
-
 import { Container } from "@mui/material";
 import { Navigate, Route, Routes } from "react-router-dom";
 
@@ -15,14 +14,15 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import InfoClase from "./Pages/InfoClase";
 
-
 import Dashboard from "./pages/Dashboard"
 import Profile from "./pages/Profile"
 import EditProfile from "./pages/EditProfile"
 import Favorites from "./pages/Favorites"
 import CreatePost from "./pages/CreatePost"
 import MyPosts from "./pages/MyPosts"
+
 import { useContext } from "react";
+
 
 
 export default function App() {
@@ -54,7 +54,5 @@ export default function App() {
       </FavoritesProvider>
       {/* <Footer /> */}
     </>
-
   );
 }
-

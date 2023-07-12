@@ -25,7 +25,7 @@ export default function Gallery() {
       <Container>
         <Grid container spacing={2} mt={3}>
           {clases.map((clase) => (
-            <Grid item key={clase.id} xs={12} sm={6} md={4} lg={3}>
+            <Grid item key={clase.id} xs={12} sm={6} md={4}>
               <Cards clase={clase} />
             </Grid>
           ))}

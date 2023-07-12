@@ -12,9 +12,14 @@ import {
 import { NavLink } from "react-router-dom";
 
 import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+
 import NavListDrawer from "./NavListDrawer";
 import CartDrawer from "../menuCart/CartDrawer";
+
 import { AuthContext } from "../../context/AuthProvider";
+import { SaleUseContext } from "../../Context/SaleContext";
+
 
 const publicNavLinks = [
   {
@@ -39,8 +44,7 @@ const privateNavLinks = [
   {
     title: "Perfil",
 
-    path: "/dashboard"
-
+    path: "/dashboard",
   },
   {
     title: "Cerrar Sesion",
@@ -57,6 +61,7 @@ const activeLink = ({ isActive }) =>
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { total } = SaleUseContext();
 
   const { user, logout } = useContext(AuthContext)
 
@@ -64,12 +69,12 @@ export default function Navbar() {
 
   return (
     <>
-
-
-      <AppBar position="sticky" sx={{ bgcolor: 'primary', zIndex: (theme) => theme.zIndex.drawer + 1 }} >
+      <AppBar
+        position="sticky"
+        sx={{ bgcolor: "primary", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+      >
         <Container>
-          <Toolbar sx={{ display: 'flex', justifyContent: 'space-around' }}>
-
+          <Toolbar sx={{ display: "flex", justifyContent: "space-around" }}>
             <IconButton
               color="inherit"
               size="large"
@@ -110,13 +115,10 @@ export default function Navbar() {
                 </Button>
               ))}
             </Box>
-            <CartDrawer />
+            {total != 0 ? <CartDrawer /> : <ShoppingCartIcon />}
           </Toolbar>
         </Container>
-
-
       </AppBar>
-
 
       <Drawer
         open={open}

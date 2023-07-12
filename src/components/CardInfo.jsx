@@ -1,17 +1,41 @@
-import { Box, Button, Paper, Typography, styled } from "@mui/material";
+import {
+  Alert,
+  Box,
+  Button,
+  Paper,
+  Snackbar,
+  Typography,
+  styled,
+} from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { SaleUseContext } from "../Context/SaleContext";
+import { useState } from "react";
 
 export default function CardInfo({ clases }) {
-  const { id, img, name, price, id_usu, desc, materia, nivel, horario } =
+  const { id, img, name, price, id_usu, desc, asignatura, nivel, horario } =
     clases;
-  console.log(clases);
+  const { agregarClase } = SaleUseContext();
+  const [open, setOpen] = useState(false);
+
   const Img = styled("img")({
     width: "50%",
     height: "100%",
     objectFit: "cover",
     objectPosition: "center",
   });
+
+  const handleAnadir = (e) => {
+    e.preventDefault();
+    const newProduct = {
+      id: clases.id,
+      name: clases.name,
+      price: clases.price,
+      amount: 1,
+      img: clases.img,
+    };
+    agregarClase(newProduct);
+  };
 
   return (
     <>
@@ -47,7 +71,7 @@ export default function CardInfo({ clases }) {
             }}
           >
             <Typography variant="h6" sx={{ my: 1, gridColumn: "1 / span 2" }}>
-              {materia}
+              {asignatura}
             </Typography>
 
             <Typography
@@ -83,7 +107,12 @@ export default function CardInfo({ clases }) {
             >
               $ {price.toLocaleString("es-CL")}
             </Typography>
-            <Button variant="contained" color="success" sx={{ mb: 2 }}>
+            <Button
+              variant="contained"
+              color="success"
+              sx={{ mb: 2 }}
+              onClick={handleAnadir}
+            >
               <AddShoppingCartIcon fontWeight="bold" sx={{ mr: 3 }} />
               Carro
             </Button>
@@ -94,6 +123,16 @@ export default function CardInfo({ clases }) {
           </Box>
         </Box>
       </Paper>
+
+      <Snackbar
+        open={open}
+        autoHideDuration={1000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert severity="warning">
+          This is a warning alert — check it out!
+        </Alert>
+      </Snackbar>
     </>
   );
 }

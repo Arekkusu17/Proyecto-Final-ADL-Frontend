@@ -6,7 +6,7 @@
     "name": "Clases Matematica basica/media",
     "price": 50000,
     "id_usu": 1,
-    "materia": "Matematicas",
+    "asignatura": "Matematicas",
     "nivel": "Basica/Media",
     "horario":"Todos los dias"
   },
@@ -17,7 +17,7 @@
     "name": "Ingles basico/medio/avanzado",
     "price": 90000,
     "id_usu": 2,
-    "materia": "Ingles",
+    "asignatura": "Ingles",
     "nivel": "Todos",
     "horario":"semana"
   },
@@ -28,7 +28,7 @@
     "name": "clases de HTML",
     "price": 50000,
     "id_usu": 3,
-    "materia": "Programacion",
+    "asignatura": "Programacion",
     "nivel": "Todos",
     "horario":"fin de semana"
   },
@@ -39,7 +39,7 @@
     "name": "Clases Matematica basica/media",
     "price": 70000,
     "id_usu": 4,
-    "materia": "Matematicas",
+    "asignatura": "Matematicas",
     "nivel": "Basica/Media",
     "horario":"fin de semana"
   },
@@ -50,7 +50,7 @@
     "name": "clases de lenguaje",
     "price": 40000,
     "id_usu": 5,
-    "materia": "Lenguaje",
+    "asignatura": "Lenguaje",
     "nivel": "Basica",
     "horario":"semana"
   },
@@ -61,7 +61,7 @@
     "name": "clases de historia basica y media ",
     "price": 75000,
     "id_usu":6 ,
-    "materia": "Historia",
+    "asignatura": "Historia",
     "nivel": "Basica/Media",
     "horario":"semana"
   },
@@ -72,7 +72,7 @@
     "name": "clases ciencia y naturaleza media",
     "price": 50000,
     "id_usu": 7,
-    "materia": "Ciencia y Naturaleza",
+    "asignatura": "Ciencia y Naturaleza",
     "nivel": "Media",
     "horario":"Todos los dias"
   }
