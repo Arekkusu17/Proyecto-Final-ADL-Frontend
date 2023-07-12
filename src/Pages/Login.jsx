@@ -7,7 +7,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { saveToken } = useContext(AuthContext)
+  const { saveToken, login } = useContext(AuthContext)
 
   const navigate = useNavigate()
 
@@ -23,10 +23,14 @@ export default function Login() {
         password,
       }),
     });
-    const data = await res.json();
-    await saveToken(data.access_token);
-    navigate("/dashboard");
-
+    if (res.ok === false) {
+      console.log("error de credenciales")
+    } else {
+      const data = await res.json();
+      await saveToken(data.access_token);
+      login();
+      navigate("/dashboard");
+    }
   };
 
   return (

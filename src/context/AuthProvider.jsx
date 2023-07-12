@@ -10,15 +10,13 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(initialStateToken);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
+  const login = () => {
     if (token) {
       getProfileUser(token);
     } else {
       setUser(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  }
   const getProfileUser = async (access_token) => {
     try {
       const res = await fetch(`https://api.escuelajs.co/api/v1/auth/profile`, {
@@ -28,6 +26,7 @@ const AuthProvider = ({ children }) => {
         },
       });
       const data = await res.json();
+      if (data.statusCode) throw new Error("Login invalido")
       setUser(data);
     } catch (error) {
       console.log(error)
@@ -56,7 +55,7 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ saveToken, user, token, getProfileUser, loading, logout }}
+      value={{ saveToken, user, token, getProfileUser, loading, logout, login }}
     >
       {children}
     </AuthContext.Provider>
