@@ -21,9 +21,12 @@ export default function FavoriteListItem({ favoriteItem }) {
     navigate(`/infoClase/${id}`)
   }
 
-  const handleAddToCart = (id) => {
+  const handleAddToCart = (product) => {
     const newProduct = {
-      id: id,
+      id: product.id,
+      name: product.name,
+      price: product.price,
+      img: product.img,
       amount: 1,
     };
     agregarClase(newProduct)
@@ -39,7 +42,7 @@ export default function FavoriteListItem({ favoriteItem }) {
     <Box component={Paper} elevation={6} padding='1rem'>
       <Stack
         alignItems="center"
-        justifyContent="space-around"
+        justifyContent="space-between"
         gap="0.5rem"
         sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
         <Avatar variant="square" sx={{ width: '150px', height: '150px', bgcolor: 'pink' }} src={favoriteItem.img} />
@@ -53,7 +56,7 @@ export default function FavoriteListItem({ favoriteItem }) {
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
               <Button color='primary' onClick={() => { handleViewProduct(favoriteItem.id) }}><PreviewIcon color="light" /></Button>
               <Button color='danger'><ClearIcon color="light" /></Button>
-              <Button color='success' onClick={() => { handleAddToCart(favoriteItem.id) }}><AddShoppingCartIcon /></Button>
+              <Button color='success' onClick={() => { handleAddToCart(favoriteItem) }}><AddShoppingCartIcon /></Button>
             </ButtonGroup>
           </Stack>
         </Stack>

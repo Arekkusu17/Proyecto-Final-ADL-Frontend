@@ -18,8 +18,6 @@ const FavoritesProvider = ({ children }) => {
     }
   }
 
-
-
   return (
     <FavoritesContext.Provider value={{ favorites, setFavorites, getFavorites }}>
       {children}

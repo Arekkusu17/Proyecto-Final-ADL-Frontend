@@ -6,15 +6,15 @@ import { useContext, useEffect } from "react";
 
 export default function Favorites() {
 
-  const { favorites, setFavorites, getFavorites } = useContext(FavoritesContext)
+  const { favorites, getFavorites } = useContext(FavoritesContext);
 
-  useEffect(() => { getFavorites() }, [])
+  useEffect(() => { getFavorites() }, []);
 
   const listFavorites = favorites.map((favoriteItem) => {
     return (
       <FavoriteListItem key={favoriteItem.id} favoriteItem={favoriteItem} />
     )
-  })
+  });
 
   return (
 
