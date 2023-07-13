@@ -34,7 +34,7 @@ export default function App() {
       <Navbar />
       <FavoritesProvider>
 
-        <Container color="primary" sx={{ p: 5 }}>
+        <Container color="primary" sx={{ p: { xs: '0' }, maxWidth: { xs: '100%' } }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/gallery" element={<Gallery />} />
