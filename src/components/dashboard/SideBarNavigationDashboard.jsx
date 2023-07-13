@@ -21,7 +21,7 @@ export default function SideBarNavigationDashboard() {
     { text: 'Editar Perfil', path: 'editprofile', icon: <EditNoteRoundedIcon /> },
     { text: 'Mis Favoritos', path: 'favorites', icon: <FavoriteIcon /> },
     { text: 'Crear Publicación', path: 'createpost', icon: <LibraryAddRoundedIcon /> },
-    { text: 'Mis Publicaciones', path: 'posts', icon: <LibraryBooksRoundedIcon /> }
+    { text: 'Mis Publicaciones', path: 'classes', icon: <LibraryBooksRoundedIcon /> }
 
   ]
 
