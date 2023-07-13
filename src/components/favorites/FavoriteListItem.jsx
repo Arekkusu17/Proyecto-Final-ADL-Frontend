@@ -7,20 +7,33 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useNavigate } from "react-router-dom";
 
 import { SaleUseContext } from "../../context/SaleContext";
+import { useEffect } from "react";
 
 
 
 
 export default function FavoriteListItem({ favoriteItem }) {
+  const { total, agregarClase } = SaleUseContext();
+
   const navigate = useNavigate()
 
-  const handleViewFavorite = (id) => {
+  const handleViewProduct = (id) => {
     navigate(`/infoClase/${id}`)
+  }
+
+  const handleAddToCart = (id) => {
+    const newProduct = {
+      id: id,
+      amount: 1,
+    };
+    agregarClase(newProduct)
   }
 
   const handleDeleteFavorite = (id) => {
     // TODO
   }
+
+  useEffect(() => { }, [total]);
 
   return (
     <Box component={Paper} elevation={6} padding='1rem'>
@@ -40,7 +53,7 @@ export default function FavoriteListItem({ favoriteItem }) {
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
               <Button color='primary' onClick={() => { handleViewProduct(favoriteItem.id) }}><PreviewIcon color="light" /></Button>
               <Button color='danger'><ClearIcon color="light" /></Button>
-              <Button color='success'><AddShoppingCartIcon /></Button>
+              <Button color='success' onClick={() => { handleAddToCart(favoriteItem.id) }}><AddShoppingCartIcon /></Button>
             </ButtonGroup>
           </Stack>
         </Stack>

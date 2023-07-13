@@ -19,10 +19,7 @@ const AuthProvider = ({ children }) => {
         },
       });
       const data = await res.json();
-      console.log(data)
-      // if (data.statusCode) throw new Error("Login invalido")
       setUser(data);
-      console.log("user:", user, data)
     } catch (error) {
       console.log(error)
       setUser(false);
