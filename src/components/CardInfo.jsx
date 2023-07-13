@@ -2,6 +2,7 @@ import {
   Alert,
   Box,
   Button,
+  CardMedia,
   Paper,
   Snackbar,
   Typography,
@@ -45,14 +46,14 @@ export default function CardInfo({ clases }) {
             display: "flex",
             width: "100%",
             margin: "0 auto",
-            display: "flex",
             alignItems: "center",
             gap: 2,
             overflow: "hidden",
             my: 5,
           }}
         >
-          <Img
+          <CardMedia
+            component='img'
             src={img}
             alt="toronto"
             sx={{

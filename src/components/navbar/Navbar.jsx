@@ -12,13 +12,11 @@ import {
 import { NavLink } from "react-router-dom";
 
 import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import NavListDrawer from "./NavListDrawer";
 import CartDrawer from "../menuCart/CartDrawer";
 
 import { AuthContext } from "../../context/AuthProvider";
-import { SaleUseContext } from "../../context/SaleContext";
 
 import { useNavigate } from "react-router-dom";
 
@@ -64,7 +62,6 @@ const activeLink = ({ isActive }) =>
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const { total } = SaleUseContext();
 
   const { user, logout } = useContext(AuthContext)
 
@@ -122,7 +119,7 @@ export default function Navbar() {
                 </Button>
               ))}
             </Box>
-            {total != 0 ? <CartDrawer /> : <ShoppingCartIcon />}
+            <CartDrawer />
           </Toolbar>
         </Container>
       </AppBar>
