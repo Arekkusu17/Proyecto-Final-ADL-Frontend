@@ -1,5 +1,6 @@
 import { Box, CardMedia, Container, Typography } from "@mui/material";
 import Hero from "../components/home/Hero";
+import Footer from "../components/Footer";
 
 export default function Home() {
   return (
@@ -39,6 +40,8 @@ export default function Home() {
           </Box>
         </Container>
       </Box>
+      <Footer />
+
     </>
   );
 }

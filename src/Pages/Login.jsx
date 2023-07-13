@@ -1,4 +1,4 @@
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, Paper, TextField, Typography } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
@@ -51,33 +51,35 @@ export default function Login() {
 
   return (
     <>
-      <Paper elevation={15} sx={{ width: "70%", margin: "0 auto" }}>
-        <form onSubmit={handleSubmit}>
-          <Box sx={{ flexGrow: 1, display: "grid", gap: 4, p: 3 }}>
-            <Typography variant="h4" textAlign="center" sx={{ my: 2 }}>
-              Acceder
-            </Typography>
-            <TextField
-              label="Email"
-              type="text"
-              value={email || ''}
-              placeholder="Email ..."
-              onChange={(e) => { setEmail(e.target.value) }}
-              fullWidth
-            />
-            <TextField
-              label="Password"
-              type="password"
-              value={password || ''}
-              onChange={(e) => { setPassword(e.target.value) }}
-              fullWidth
-            />
-            <Button type="submit" variant="contained" color="primary">
-              Login
-            </Button>
-          </Box>
-        </form>
-      </Paper>
+      <Container sx={{ p: '2rem' }}>
+        <Paper elevation={15} sx={{ width: "70%", margin: "0 auto" }}>
+          <form onSubmit={handleSubmit}>
+            <Box sx={{ flexGrow: 1, display: "grid", gap: 4, p: 3 }}>
+              <Typography variant="h4" textAlign="center" sx={{ my: 2 }}>
+                Acceder
+              </Typography>
+              <TextField
+                label="Email"
+                type="text"
+                value={email || ''}
+                placeholder="Email ..."
+                onChange={(e) => { setEmail(e.target.value) }}
+                fullWidth
+              />
+              <TextField
+                label="Password"
+                type="password"
+                value={password || ''}
+                onChange={(e) => { setPassword(e.target.value) }}
+                fullWidth
+              />
+              <Button type="submit" variant="contained" color="primary">
+                Login
+              </Button>
+            </Box>
+          </form>
+        </Paper>
+      </Container>
     </>
   );
 }

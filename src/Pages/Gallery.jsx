@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Container, Grid } from "@mui/material";
 import Cards from "../components/Cards";
+import Footer from "../components/Footer";
 
 export default function Gallery() {
   const [clases, setClases] = useState([]);
@@ -31,6 +32,8 @@ export default function Gallery() {
           ))}
         </Grid>
       </Container>
+      <Footer />
+
     </>
   );
 }
