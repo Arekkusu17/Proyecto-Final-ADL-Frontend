@@ -1,4 +1,4 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
 import { SaleUseContext } from "../../context/SaleContext";
 import { useEffect } from "react";
 
@@ -32,34 +32,13 @@ export default function CartItemDrawer({ product }) {
   return (
     <>
       <Box
-        sx={{
-          border: "2px dashed gray",
-        }}
+
         display="flex"
         alignItems="center"
         justifyContent="center"
         width="100%"
       >
-        <Box
-          maxWidth="100%"
-          sx={{
-            maxWidth: "150px",
-            maxHeight: "140px",
-            width: "100%",
-            height: "auto",
-            m: 2,
-          }}
-        >
-          <img
-            src={product.img}
-            alt="imagen de la clase"
-            style={{
-              objectFit: "contain",
-              width: "100%",
-              height: "100%",
-            }}
-          />
-        </Box>
+        <Avatar variant="square" sx={{ padding: '0.5rem', width: '150px', height: '150px' }} src={product.img} />
         <Box
           sx={{
             display: "flex",
@@ -75,7 +54,7 @@ export default function CartItemDrawer({ product }) {
               justifyContent: "space-between",
             }}
           >
-            <Typography variant="h6" sx={{ mt: 0 }}>
+            <Typography fontWeight='bold' sx={{ mt: 0 }}>
               {product.name}
             </Typography>
             <Box sx={{ display: "flex", mt: 2 }}>

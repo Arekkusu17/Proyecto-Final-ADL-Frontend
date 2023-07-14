@@ -10,10 +10,13 @@ export default function Footer() {
     <>
       <AppBar
         position="static"
+        component='footer'
         sx={{
+          mt: '2rem',
           bgcolor: "primary",
-          height: 180,
-          color: "black",
+          height: 'auto',
+          pb: '3rem',
+          color: "black"
         }}
       >
         <Container sx={{ display: "flex", margin: "0 auto" }}>

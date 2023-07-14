@@ -19,9 +19,9 @@ import Profile from "./pages/Profile"
 import EditProfile from "./pages/EditProfile"
 import Favorites from "./pages/Favorites"
 import CreatePost from "./pages/CreatePost"
-import MyPosts from "./pages/MyPosts"
 
 import { useContext } from "react";
+import MyClasses from "./Pages/MyClasses";
 
 
 
@@ -34,26 +34,25 @@ export default function App() {
       <Navbar />
       <FavoritesProvider>
 
-        <Container color="primary" sx={{ p: 5 }}>
+        <Container color="primary" sx={{ p: { xs: '0' }, maxWidth: { xs: '100%' } }}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/infoClase/:id" element={<InfoClase />} />
-            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile"></Route>
             <Route path="/cart"></Route>
+            <Route path="/login" element={!user & !loading ? <Login /> : <Navigate to="/dashboard" />} />
             <Route path="/dashboard" element={user && !loading ? <Dashboard /> : <Navigate to="/login" />}>
               <Route path="profile" element={<Profile />} />
               <Route path="editprofile" element={<EditProfile />} />
               <Route path="favorites" element={<Favorites />} />
               <Route path="createpost" element={<CreatePost />} />
-              <Route path="posts" element={<MyPosts />} />
+              <Route path="classes" element={<MyClasses />} />
             </Route>
           </Routes>
         </Container>
       </FavoritesProvider>
-      {/* <Footer /> */}
     </>
   );
 }

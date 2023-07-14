@@ -7,7 +7,6 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 
-import "./index.css";
 
 const theme = createTheme({
   palette: {
@@ -42,20 +41,23 @@ import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 
 import AuthProvider from "./context/AuthProvider.jsx";
-import SaleContextProvider from "./Context/SaleContext.jsx";
- 
+import SaleContextProvider from "./context/SaleContext.jsx";
+import MyClassesProvider from "./context/MyClassesProvider.jsx";
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <SaleContextProvider>
-      <AuthProvider>
-        <CssBaseline />
-        <BrowserRouter>
-          <ThemeProvider theme={theme}>
-            <App/>
-          </ThemeProvider>
-        </BrowserRouter>
-      </AuthProvider>
+      <MyClassesProvider>
+        <AuthProvider>
+          <CssBaseline />
+          <BrowserRouter>
+            <ThemeProvider theme={theme}>
+              <App />
+            </ThemeProvider>
+          </BrowserRouter>
+        </AuthProvider>
+      </MyClassesProvider>
     </SaleContextProvider>
   </React.StrictMode>
 );

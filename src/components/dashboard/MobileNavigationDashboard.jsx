@@ -80,7 +80,7 @@ export default function MobileNavigationDashboard() {
 
         />
         <BottomNavigationAction
-          to='posts'
+          to='classes'
           component={NavLink}
           label="Publicaciones"
           values="posts"

@@ -1,26 +1,33 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
+import HeroImage from "../../assets/img/home3_1.jpg"
 
-export default function Banner() {
-  return (
-    <>
-      <Container sx={{ border: 0, margin: 0, padding: 0 }}>
+export default function Hero() {
+  return (<>
+    <Box>
+      <Box
+        sx={{
+          backgroundImage: `url(${HeroImage})`,
+          backgroundRepeat: "no-repeat",
+          backgroundColor: "black",
+          backgroundPosition: "center",
+          backgroundSize: "cover",
+          height: '600px',
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+        }}
+      >
         <Box
-          position="relative"
-          display="inline-block"
-          sx={{ display: "flex", margin: "0 auto" }}
+          sx={{
+            width: { xs: "100%", sm: "60%" },
+            padding: { xs: 3, sm: 2, md: 20 },
+          }}
         >
-          <Box position="relative" sx={{ flexGrow: 1, flexBasis: 0 }}>
-
-          </Box>
-          <Box
-            position="absolute"
-            top="5%"
-            left="27%"
-            transform="translate(-50%, -50%)"
+          <Box position="relative"
             textAlign="center"
             p={2}
             bgcolor="rgba(0, 0, 0, 0.7)"
-          >
+            flexDirection='column'>
             <Typography
               variant="h3"
               component="h1"
@@ -44,7 +51,6 @@ export default function Banner() {
             </Button>
           </Box>
         </Box>
-      </Container>
-    </>
-  );
+      </Box>
+    </Box></>)
 }

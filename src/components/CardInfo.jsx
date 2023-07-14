@@ -1,9 +1,10 @@
 import {
-  Alert,
   Box,
   Button,
+  Card,
+  CardContent,
+  CardMedia,
   Paper,
-  Snackbar,
   Typography,
   styled,
 } from "@mui/material";
@@ -40,99 +41,66 @@ export default function CardInfo({ clases }) {
   return (
     <>
       <Paper elevation={15}>
-        <Box
-          sx={{
-            display: "flex",
-            width: "100%",
-            margin: "0 auto",
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            overflow: "hidden",
-            my: 5,
-          }}
-        >
-          <Img
+        <Card sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between' }}>
+          <CardMedia
+            component="img"
+            sx={{ width: { xs: '100%', md: '50%' }, height: '500px' }}
             src={img}
-            alt="toronto"
-            sx={{
-              maxWidth: "600px",
-              maxHeight: "600px",
-              borderTopLeftRadius: "5px",
-              borderBottomLeftRadius: "5px",
-            }}
+            alt="Live from space album cover"
           />
-          <Box
-            sx={{
-              flexGrow: 1,
-              display: "grid",
-              gap: 1,
-              gridTemplateColumns: "1fr 1fr",
-            }}
-          >
-            <Typography variant="h6" sx={{ my: 1, gridColumn: "1 / span 2" }}>
-              {asignatura}
-            </Typography>
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <CardContent sx={{ flex: '1 0 auto' }}>
+              <Typography fontWeight="bold" component="div" variant="h4" >
+                {name}
+              </Typography>
+              <Typography variant="subtitle1" color="text.secondary" component="div">
+                {asignatura}
+              </Typography>
+              <Typography > Nivel: <strong>{nivel}</strong> </Typography>
 
-            <Typography
-              variant="h4"
-              fontWeight="bold"
-              sx={{ mb: 2, gridColumn: "1 / span 2" }}
-            >
-              {name}
-            </Typography>
-            <Typography fontWeight="bold"> Nivel: </Typography>
-            <Typography textAlign="right" sx={{ mr: 3 }}>
-              {nivel}
-            </Typography>
-            <Typography fontWeight="bold"> Horarios: </Typography>
-            <Typography textAlign="right" sx={{ mr: 3 }}>
-              {horario}
-            </Typography>
-            <Typography fontWeight="bold" sx={{ mt: 3 }}>
-              {" "}
-              Descripcion:{" "}
-            </Typography>
-            <Typography
-              textAlign="justify"
-              sx={{ mr: 3, mb: 3, gridColumn: "1 / span 2" }}
-            >
-              {desc}
-            </Typography>
-            <Typography
-              variant="h5"
-              fontWeight="bold"
-              color="secondary"
-              sx={{ mb: 2, gridColumn: "1 / span 2" }}
-            >
-              $ {price.toLocaleString("es-CL")}
-            </Typography>
-            <Button
-              variant="contained"
-              color="success"
-              sx={{ mb: 2 }}
-              onClick={handleAnadir}
-            >
-              <AddShoppingCartIcon fontWeight="bold" sx={{ mr: 3 }} />
-              Carro
-            </Button>
-            <Button variant="contained" color="success" sx={{ mb: 2, mr: 2 }}>
-              <FavoriteBorderIcon fontWeight="bold" sx={{ mr: 3 }} />
-              Favoritos
-            </Button>
+              <Typography fontWeight="bold"> Horarios: {horario} </Typography>
+
+              <Typography fontWeight="bold" sx={{ mt: 3 }}>
+
+                Descripcion:{" "}
+              </Typography>
+              <Typography
+                textAlign="justify"
+                sx={{ mr: 3, mb: 3, gridColumn: "1 / span 2" }}
+              >
+                {desc}
+              </Typography>
+              <Typography
+                variant="h5"
+                fontWeight="bold"
+                color="secondary"
+                sx={{ mb: 2, gridColumn: "1 / span 2" }}
+              >
+                Precio: ${price.toLocaleString("es-CL")}.
+              </Typography>
+              <Box display='flex' justifyContent="space-between" gap='1rem'>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="success"
+                  onClick={handleAnadir}
+                >
+                  <AddShoppingCartIcon fontWeight="bold" />
+                  Carro
+                </Button>
+                <Button
+                  fullWidth
+                  variant="contained" color="primary" >
+                  <FavoriteBorderIcon fontWeight="bold" />
+                  Favoritos
+                </Button>
+              </Box>
+            </CardContent>
+            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
+            </Box>
           </Box>
-        </Box>
+        </Card>
       </Paper>
-
-      <Snackbar
-        open={open}
-        autoHideDuration={1000}
-        onClose={() => setOpen(false)}
-      >
-        <Alert severity="warning">
-          This is a warning alert — check it out!
-        </Alert>
-      </Snackbar>
     </>
   );
 }

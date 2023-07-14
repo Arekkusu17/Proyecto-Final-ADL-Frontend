@@ -1,19 +1,20 @@
 import { Container, Stack, Typography } from "@mui/material";
 import FavoriteListItem from "../components/favorites/favoriteListItem";
 import { FavoritesContext } from "../context/FavoritesProvider";
-import React from "react";
+import { useContext, useEffect } from "react";
 
 
 export default function Favorites() {
 
-  const { favorites } = React.useContext(FavoritesContext)
+  const { favorites, getFavorites } = useContext(FavoritesContext);
 
-  const listFavorites = favorites.map((favorite) => (
-    <FavoriteListItem key={favorite.id} favoriteItem={favorite} />
-  ))
+  useEffect(() => { getFavorites() }, []);
 
-
-
+  const listFavorites = favorites.map((favoriteItem) => {
+    return (
+      <FavoriteListItem key={favoriteItem.id} favoriteItem={favoriteItem} />
+    )
+  });
 
   return (
 
@@ -21,9 +22,6 @@ export default function Favorites() {
       <Stack gap='1.5rem' mt='1rem'>
         <Typography variant="h3" fontWeight='bold'>Mis Favoritos</Typography>
         {listFavorites}
-        <FavoriteListItem />
-        <FavoriteListItem />
-        <FavoriteListItem />
       </Stack>
     </Container>
   )

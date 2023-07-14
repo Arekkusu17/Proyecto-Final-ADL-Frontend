@@ -1,0 +1,22 @@
+[{
+  "desc": "aprende HTML en 3 clases",
+  "id": "pro001",
+  "img": "/public/img/progra1.jpg",
+  "name": "clases de HTML",
+  "price": 50000,
+  "id_usu": 3,
+  "asignatura": "Programacion",
+  "nivel": "Todos",
+  "horario":"fin de semana"
+},
+{
+  "desc": "10 Clases de matematicas para media y basica de 1 hora",
+  "id": "mate002",
+  "img": "/public/img/mate2.jpg",
+  "name": "Clases Matematica basica/media",
+  "price": 70000,
+  "id_usu": 4,
+  "asignatura": "Matematicas",
+  "nivel": "Basica/Media",
+  "horario":"fin de semana"
+}]

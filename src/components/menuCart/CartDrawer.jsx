@@ -1,4 +1,6 @@
 import {
+  Alert,
+  AlertTitle,
   Badge,
   Box,
   Button,
@@ -14,6 +16,7 @@ import CartItemDrawer from "./CartItemDrawer";
 import { KeyboardArrowRight } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
 import { SaleUseContext } from "../../context/SaleContext";
+
 
 export default function MenuCart() {
   const [openMenuCart, setopenMenuCart] = useState(false);
@@ -37,6 +40,14 @@ export default function MenuCart() {
   const handleCloseDrawerCart = () => {
     setopenMenuCart(false);
   };
+
+  const listCartItems = data.products.map((product) => {
+    return (
+      <Box key={product.id}>
+        <CartItemDrawer product={product} />
+      </Box>)
+  })
+
   return (
     <div>
       <IconButton color="inherit" aria-label="" onClick={handleOpenDrawerCart}>
@@ -47,6 +58,7 @@ export default function MenuCart() {
       <Drawer
         open={openMenuCart}
         anchor="right"
+        onMouseLeave={handleCloseDrawerCart}
         onClose={handleCloseDrawerCart}
         sx={{
           width: "auto",
@@ -63,11 +75,14 @@ export default function MenuCart() {
           <Typography variant="h5" sx={{ mb: 3 }}>
             Carro de Compra
           </Typography>
-          {data.products.map((product) => (
-            <Box key={product.id}>
-              <CartItemDrawer product={product} />
-            </Box>
-          ))}
+          {total > 0 ? listCartItems :
+            <Container maxWidth='xs'>
+              <Alert variant="outlined" severity="info">
+                <AlertTitle>Carro Vacío</AlertTitle>
+                <Typography >Actualmente tu carro no contiene productos. <strong>¡Te invitamos a revisar nuestra galería!</strong>
+                </Typography>
+              </Alert>
+            </Container>}
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography variant="h5" sx={{ mt: 3 }}>
               Total
@@ -76,10 +91,12 @@ export default function MenuCart() {
               $ {total.toLocaleString("es-CL")}
             </Typography>
           </Box>
+          {/* DISABLED BUTTON FOR THE MOMENT  */}
           <Button
             variant="contained"
             endIcon={<KeyboardArrowRight />}
             color="success"
+            disabled
             component={NavLink}
             to="/cart"
             onClick={handleCloseDrawerCart}
