@@ -1,0 +1,79 @@
+[
+  {
+    "desc": "5 Clases de matematicas para media y basica de 45 min 5 Clases de matematicas para media y basica de 45 min 5 Clases de matematicas para media y basica de 45 min",
+    "id": "mate001",
+    "img": "/public/img/mate1.jpg",
+    "name": "Clases Matematica basica/media",
+    "price": 50000,
+    "id_usu": 1,
+    "asignatura": "Matematicas",
+    "nivel": "Basica/Media",
+    "horario":"Todos los dias"
+  },
+  {
+    "desc": "10 clases de ingles",
+    "id": "ingles001",
+    "img": "/public/img/ingles1.jpg",
+    "name": "Ingles basico/medio/avanzado",
+    "price": 90000,
+    "id_usu": 2,
+    "asignatura": "Ingles",
+    "nivel": "Todos",
+    "horario":"semana"
+  },
+  {
+    "desc": "aprende HTML en 3 clases",
+    "id": "pro001",
+    "img": "/public/img/progra1.jpg",
+    "name": "clases de HTML",
+    "price": 50000,
+    "id_usu": 3,
+    "asignatura": "Programacion",
+    "nivel": "Todos",
+    "horario":"fin de semana"
+  },
+  {
+    "desc": "10 Clases de matematicas para media y basica de 1 hora",
+    "id": "mate002",
+    "img": "/public/img/mate2.jpg",
+    "name": "Clases Matematica basica/media",
+    "price": 70000,
+    "id_usu": 4,
+    "asignatura": "Matematicas",
+    "nivel": "Basica/Media",
+    "horario":"fin de semana"
+  },
+  {
+    "desc": "4 clases de Lenguaje y Comunicación ensenanza basica",
+    "id": "leng001",
+    "img": "/public/img/leng1.jpg",
+    "name": "clases de lenguaje",
+    "price": 40000,
+    "id_usu": 5,
+    "asignatura": "Lenguaje",
+    "nivel": "Basica",
+    "horario":"semana"
+  },
+  {
+    "desc": "10 horas de historia, basica y media",
+    "id": "his001",
+    "img": "/public/img/his1.jpg",
+    "name": "clases de historia basica y media ",
+    "price": 75000,
+    "id_usu":6 ,
+    "asignatura": "Historia",
+    "nivel": "Basica/Media",
+    "horario":"semana"
+  },
+  {
+    "desc": "4 horas mensuales de ciencia y naturaleza para media ",
+    "id": "ciencia001",
+    "img": "/public/img/ciencia1.jpg",
+    "name": "clases ciencia y naturaleza media",
+    "price": 50000,
+    "id_usu": 7,
+    "asignatura": "Ciencia y Naturaleza",
+    "nivel": "Media",
+    "horario":"Todos los dias"
+  }
+]

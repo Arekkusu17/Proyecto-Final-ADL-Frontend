@@ -1,0 +1,11 @@
+[{
+  "desc": "5 Clases de matematicas para media y basica de 45 min 5 Clases de matematicas para media y basica de 45 min 5 Clases de matematicas para media y basica de 45 min",
+  "id": "mate001",
+  "img": "/public/img/mate1.jpg",
+  "name": "Clases Matematica basica/media",
+  "price": 50000,
+  "id_usu": 1,
+  "materia": "Matematicas",
+  "nivel": "Basica/Media",
+  "horario":"Todos los dias"
+}]
