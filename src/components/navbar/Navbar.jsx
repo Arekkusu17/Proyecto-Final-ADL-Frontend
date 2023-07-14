@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
+import logo from "../../assets/img/navbar-logo.png"
 import MenuIcon from "@mui/icons-material/Menu";
 
 import NavListDrawer from "./NavListDrawer";
@@ -92,7 +93,7 @@ export default function Navbar() {
               component={NavLink}
               to={"/"}
             >
-              Logo
+              <img src={logo}></img>
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "flex" } }}>
               {navLinks.map((item) => (item.path !== "/logout" ?
