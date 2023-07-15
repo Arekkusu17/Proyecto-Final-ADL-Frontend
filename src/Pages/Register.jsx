@@ -1,5 +1,6 @@
 import { Box, Button, Container, Paper, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { Public } from "../components/routesProtection/public";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -30,48 +31,50 @@ export default function Register() {
 
   return (
     <>
-      <Container sx={{ p: '2rem' }}>
-        <Paper elevation={15} sx={{ width: "70%", margin: "0 auto" }}>
-          <form onSubmit={handleSubmit}>
-            <Box sx={{ flexGrow: 1, display: "grid", gap: 4, p: 3 }}>
-              <Typography variant="h4" textAlign="center" sx={{ my: 2 }}>
-                Registro
-              </Typography>
-              <TextField
-                label="Email"
-                type="email"
-                value={email}
-                onChange={handleEmail}
-                fullWidth
-              />
-              <TextField
-                label="Nombre"
-                type="text"
-                value={nombre}
-                onChange={handleNombre}
-                fullWidth
-              />
-              <TextField
-                label="Apellidos"
-                type="text"
-                value={apellido}
-                onChange={handleApellido}
-                fullWidth
-              />
-              <TextField
-                label="Password"
-                type="password"
-                value={password}
-                onChange={handlePassword}
-                fullWidth
-              />
-              <Button type="submit" variant="contained" color="primary">
-                Registrar
-              </Button>
-            </Box>
-          </form>
-        </Paper>
-      </Container>
+      <Public>
+        <Container sx={{ p: '2rem' }}>
+          <Paper elevation={15} sx={{ width: "70%", margin: "0 auto" }}>
+            <form onSubmit={handleSubmit}>
+              <Box sx={{ flexGrow: 1, display: "grid", gap: 4, p: 3 }}>
+                <Typography variant="h4" textAlign="center" sx={{ my: 2 }}>
+                  Registro
+                </Typography>
+                <TextField
+                  label="Email"
+                  type="email"
+                  value={email}
+                  onChange={handleEmail}
+                  fullWidth
+                />
+                <TextField
+                  label="Nombre"
+                  type="text"
+                  value={nombre}
+                  onChange={handleNombre}
+                  fullWidth
+                />
+                <TextField
+                  label="Apellidos"
+                  type="text"
+                  value={apellido}
+                  onChange={handleApellido}
+                  fullWidth
+                />
+                <TextField
+                  label="Password"
+                  type="password"
+                  value={password}
+                  onChange={handlePassword}
+                  fullWidth
+                />
+                <Button type="submit" variant="contained" color="primary">
+                  Registrar
+                </Button>
+              </Box>
+            </form>
+          </Paper>
+        </Container>
+      </Public>
     </>
   );
 }
