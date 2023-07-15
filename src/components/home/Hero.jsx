@@ -1,5 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import HeroImage from "../../assets/img/home3_1.jpg"
+import HeroImage from "../../assets/img/heroImg.jpg"
 
 export default function Hero() {
   return (<>
