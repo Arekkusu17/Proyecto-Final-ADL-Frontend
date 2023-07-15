@@ -1,7 +1,8 @@
-import { Container, Typography } from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CardInfo from "../components/CardInfo";
+import PacmanLoader from "react-spinners/PacmanLoader";
 
 export default function InfoClase() {
   const id = useParams();
@@ -27,7 +28,20 @@ export default function InfoClase() {
   }, []);
 
   if (loading) {
-    return <Typography variant="h5"> Loading... </Typography>;
+    return (
+      <Box
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <Box textAlign="center">
+          <PacmanLoader color="#3A98B9" size={30} />
+        </Box>
+      </Box>
+    );
   }
 
   return (
