@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
@@ -48,9 +48,18 @@ const AuthProvider = ({ children }) => {
   };
 
 
+  useEffect(() => {
+    if (token) {
+      getProfileUser(token);
+    } else {
+      setUser(false);
+    }
+  }, [])
+
+
   return (
     <AuthContext.Provider
-      value={{ saveToken, user, setUser, token, getProfileUser, loading, logout }}
+      value={{ saveToken, user, setUser, token, getProfileUser, logout, loading }}
     >
       {children}
     </AuthContext.Provider>

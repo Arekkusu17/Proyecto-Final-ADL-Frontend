@@ -50,7 +50,7 @@ export default function MenuCart() {
 
   return (
     <div>
-      <IconButton color="inherit" aria-label="" onClick={handleOpenDrawerCart}>
+      <IconButton color="inherit" aria-label="" onClick={() => { openMenuCart ? handleCloseDrawerCart() : handleOpenDrawerCart() }}>
         <Badge badgeContent={totalAmount} color="warning">
           <ShoppingCartIcon />
         </Badge>
@@ -71,8 +71,8 @@ export default function MenuCart() {
         }}
       >
         <Toolbar />
-        <Container>
-          <Typography variant="h5" sx={{ mb: 3 }}>
+        <Container >
+          <Typography mt='1.5rem' variant="h5" sx={{ mb: 3 }}>
             Carro de Compra
           </Typography>
           {total > 0 ? listCartItems :
@@ -91,7 +91,7 @@ export default function MenuCart() {
               $ {total.toLocaleString("es-CL")}
             </Typography>
           </Box>
-          {/* DISABLED BUTTON FOR THE MOMENT  */}
+          {/* DISABLED BUTTON FOR THE MOMENT, WORK IN PROGRESS  */}
           <Button
             variant="contained"
             endIcon={<KeyboardArrowRight />}
