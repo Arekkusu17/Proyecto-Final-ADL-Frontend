@@ -1,17 +1,24 @@
-import { Box, Button, Container, Paper, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Public } from "../components/routesProtection/public";
+import Swal from "sweetalert2";
 
 export default function Login() {
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const { saveToken, token, getProfileUser, setUser } = useContext(AuthContext)
+  const { saveToken, token, getProfileUser, setUser } = useContext(AuthContext);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
@@ -19,12 +26,12 @@ export default function Login() {
     } else {
       setUser(false);
     }
-  }, [])
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch(`https://api.escuelajs.co/api/v1/auth/login`, {
+      const res = await fetch(import.meta.env.VITE_URL + `users/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -34,26 +41,26 @@ export default function Login() {
           password,
         }),
       });
-      if (res.ok === false) {
-        console.log("error de credenciales")
+      const data = await res.json();
+      if (res.ok) {
+        await saveToken(data.token);
+        navigate("/dashboard");
       } else {
-        try {
-          const data = await res.json();
-          await saveToken(data.access_token);
-          navigate("/dashboard")
-        } catch (error) {
-          console.log(error)
-        }
+        throw data.result;
       }
     } catch (error) {
-      console.log(error)
+      Swal.fire({
+        icon: "error",
+        title: error,
+        confirmButtonText: "Aceptar",
+      });
     }
   };
 
   return (
     <>
       <Public>
-        <Container sx={{ p: '2rem' }}>
+        <Container sx={{ p: "2rem" }}>
           <Paper elevation={15} sx={{ width: "70%", margin: "0 auto" }}>
             <form onSubmit={handleSubmit}>
               <Box sx={{ flexGrow: 1, display: "grid", gap: 4, p: 3 }}>
@@ -63,16 +70,20 @@ export default function Login() {
                 <TextField
                   label="Email"
                   type="text"
-                  value={email || ''}
+                  value={email || ""}
                   placeholder="Email ..."
-                  onChange={(e) => { setEmail(e.target.value) }}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                   fullWidth
                 />
                 <TextField
                   label="Password"
                   type="password"
-                  value={password || ''}
-                  onChange={(e) => { setPassword(e.target.value) }}
+                  value={password || ""}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                   fullWidth
                 />
                 <Button type="submit" variant="contained" color="primary">

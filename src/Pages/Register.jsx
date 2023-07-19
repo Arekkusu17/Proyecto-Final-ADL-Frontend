@@ -1,6 +1,14 @@
-import { Box, Button, Container, Paper, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { Public } from "../components/routesProtection/public";
+import Swal from "sweetalert2";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -21,18 +29,52 @@ export default function Register() {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Email:", email);
-    console.log("Nombre:", nombre);
-    console.log("Apellido:", apellido);
-    console.log("Password:", password);
+
+    const data = {
+      name: nombre,
+      lastName: apellido,
+      email: email,
+      password: password,
+    };
+
+    try {
+      const response = await fetch(import.meta.env.VITE_URL + "users", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      if (response.ok) {
+        Swal.fire({
+          icon: "success",
+          title: "Usuario Registrado con Exito",
+          confirmButtonText: "Aceptar",
+          didClose: () => {
+            window.location.href = "/login";
+          },
+        });
+      } else {
+        throw response;
+      }
+    } catch (error) {
+      const msg = await error.json();
+      let msgError = msg.result;
+      !msgError ? (msgError = msg.error) : null;
+      Swal.fire({
+        icon: "error",
+        title: msgError,
+        confirmButtonText: "Aceptar",
+      });
+    }
   };
 
   return (
     <>
       <Public>
-        <Container sx={{ p: '2rem' }}>
+        <Container sx={{ p: "2rem" }}>
           <Paper elevation={15} sx={{ width: "70%", margin: "0 auto" }}>
             <form onSubmit={handleSubmit}>
               <Box sx={{ flexGrow: 1, display: "grid", gap: 4, p: 3 }}>

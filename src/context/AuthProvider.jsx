@@ -12,7 +12,7 @@ const AuthProvider = ({ children }) => {
 
   const getProfileUser = async (access_token) => {
     try {
-      const res = await fetch(`https://api.escuelajs.co/api/v1/auth/profile`, {
+      const res = await fetch(import.meta.env.VITE_URL + `users/profile`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${access_token}`,
@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
       const data = await res.json();
       setUser(data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setUser(false);
     }
   };
@@ -44,9 +44,7 @@ const AuthProvider = ({ children }) => {
     setUser(false);
     setToken(null);
     localStorage.removeItem("token");
-
   };
-
 
   useEffect(() => {
     if (token) {
@@ -54,12 +52,19 @@ const AuthProvider = ({ children }) => {
     } else {
       setUser(false);
     }
-  }, [])
-
+  }, []);
 
   return (
     <AuthContext.Provider
-      value={{ saveToken, user, setUser, token, getProfileUser, logout, loading }}
+      value={{
+        saveToken,
+        user,
+        setUser,
+        token,
+        getProfileUser,
+        logout,
+        loading,
+      }}
     >
       {children}
     </AuthContext.Provider>
