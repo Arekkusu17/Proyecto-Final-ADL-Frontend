@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-import logo from "../../assets/img/navbar-logo.png"
+import logo from "../../assets/img/navbar-logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import NavListDrawer from "./NavListDrawer";
@@ -35,14 +35,13 @@ export default function Navbar() {
     { to: "/gallery", text: "Galeria", private: false },
     { to: "/login", text: "Iniciar Sesion", private: false, publicOnly: true },
     { to: "/register", text: "Regristarse", private: false, publicOnly: true },
-    { to: "/dashboard", text: "Perfil", private: true }
-  ]
+    { to: "/dashboard", text: "Perfil", private: true },
+  ];
 
-  const { user, logout } = useContext(AuthContext)
-
+  const { user, logout } = useContext(AuthContext);
 
   // const navLinks = !user ? publicNavLinks : privateNavLinks;
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   return (
     <>
@@ -57,7 +56,9 @@ export default function Navbar() {
               size="large"
               edge="start"
               aria-label="menu"
-              onClick={() => { !open ? setOpen(true) : setOpen(false) }}
+              onClick={() => {
+                !open ? setOpen(true) : setOpen(false);
+              }}
               sx={{ display: { xs: "flex", sm: "none" } }}
             >
               <MenuIcon />
@@ -85,18 +86,20 @@ export default function Navbar() {
                   >
                     {item.text}
                   </Button>
-                )
+                );
               })}
-              {user && (<Button
-                color="inherit"
-                sx={{ mx: "0.5rem" }}
-                onClick={() => {
-                  logout();
-                  navigate("/");
-                }}
-              >
-                Cerrar Sesion
-              </Button>)}
+              {user && (
+                <Button
+                  color="inherit"
+                  sx={{ mx: "0.5rem" }}
+                  onClick={() => {
+                    logout();
+                    navigate("/");
+                  }}
+                >
+                  Cerrar Sesion
+                </Button>
+              )}
             </Box>
             <CartDrawer />
           </Toolbar>
@@ -107,7 +110,7 @@ export default function Navbar() {
         open={open}
         anchor="top"
         onClose={() => setOpen(false)}
-        sx={{ display: { xs: "block", sm: "none" }, height: 10 }}
+        sx={{ display: { xs: "block", sm: "none" }, height: 100 }}
       >
         <NavListDrawer navLinks={navLinks} />
       </Drawer>

@@ -8,7 +8,6 @@ export default function Gallery() {
 
   const getClases = async () => {
     try {
-      //      const res = await fetch("Clases.json");
       const res = await fetch(import.meta.env.VITE_URL + "classes", {
         method: "GET",
       });
