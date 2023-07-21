@@ -14,8 +14,17 @@ import { SaleUseContext } from "../context/SaleContext";
 import { useState } from "react";
 
 export default function CardInfo({ clases }) {
-  const { id, img, name, price, id_usu, desc, asignatura, nivel, horario } =
-    clases;
+  const {
+    id,
+    img,
+    name,
+    price,
+    id_usu,
+    description,
+    subject,
+    level,
+    schedule,
+  } = clases;
   const { agregarClase } = SaleUseContext();
   const [open, setOpen] = useState(false);
 
@@ -41,34 +50,46 @@ export default function CardInfo({ clases }) {
   return (
     <>
       <Paper elevation={15}>
-        <Card sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between' }}>
+        <Card
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: "space-between",
+          }}
+        >
           <CardMedia
             component="img"
-            sx={{ width: { xs: '100%', md: '50%' }, height: '500px' }}
+            sx={{ width: { xs: "100%", md: "50%" }, height: "500px" }}
             src={img}
             alt="Live from space album cover"
           />
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flex: '1 0 auto' }}>
-              <Typography fontWeight="bold" component="div" variant="h4" >
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <CardContent sx={{ flex: "1 0 auto" }}>
+              <Typography fontWeight="bold" component="div" variant="h4">
                 {name}
               </Typography>
-              <Typography variant="subtitle1" color="text.secondary" component="div">
-                {asignatura}
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                component="div"
+              >
+                {subject}
               </Typography>
-              <Typography > Nivel: <strong>{nivel}</strong> </Typography>
+              <Typography>
+                {" "}
+                Nivel: <strong>{level}</strong>{" "}
+              </Typography>
 
-              <Typography fontWeight="bold"> Horarios: {horario} </Typography>
+              <Typography fontWeight="bold"> Horarios: {schedule} </Typography>
 
               <Typography fontWeight="bold" sx={{ mt: 3 }}>
-
                 Descripcion:{" "}
               </Typography>
               <Typography
                 textAlign="justify"
                 sx={{ mr: 3, mb: 3, gridColumn: "1 / span 2" }}
               >
-                {desc}
+                {description}
               </Typography>
               <Typography
                 variant="h5"
@@ -78,7 +99,7 @@ export default function CardInfo({ clases }) {
               >
                 Precio: ${price.toLocaleString("es-CL")}.
               </Typography>
-              <Box display='flex' justifyContent="space-between" gap='1rem'>
+              <Box display="flex" justifyContent="space-between" gap="1rem">
                 <Button
                   fullWidth
                   variant="contained"
@@ -88,16 +109,15 @@ export default function CardInfo({ clases }) {
                   <AddShoppingCartIcon fontWeight="bold" />
                   Carro
                 </Button>
-                <Button
-                  fullWidth
-                  variant="contained" color="primary" >
+                <Button fullWidth variant="contained" color="primary">
                   <FavoriteBorderIcon fontWeight="bold" />
                   Favoritos
                 </Button>
               </Box>
             </CardContent>
-            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-            </Box>
+            <Box
+              sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
+            ></Box>
           </Box>
         </Card>
       </Paper>

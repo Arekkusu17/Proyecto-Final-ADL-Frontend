@@ -1,30 +1,48 @@
 import { Container, Stack, Typography } from "@mui/material";
 import MyClassListItem from "../components/myClasses/myClassListItem";
-import { useContext, useEffect } from "react";
-import { MyClassesContext } from "../context/MyClassesProvider";
-
+import { useContext, useEffect, useState } from "react";
 
 export default function MyClasses() {
+  const token = localStorage.getItem("token");
 
-  const { myClasses, getMyClasses } = useContext(MyClassesContext)
+  const [clases, setClases] = useState([]);
 
-  useEffect(() => { getMyClasses() }, [])
+  const getClases = async () => {
+    try {
+      const res = await fetch(import.meta.env.VITE_URL + "classes/users", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-  const listMyClasses = myClasses.map((myClassItem) => {
-    return (
-      <MyClassListItem key={myClassItem.id} myClassItem={myClassItem} />
-    )
+      const data = await res.json();
+      console.log(data.result);
+      setClases(data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getClases();
+  }, []);
+
+  const listMyClasses = clases.map((clase) => {
+    return <MyClassListItem key={clase.id} myClassItem={clase} />;
   });
 
   return (
-    <Container maxWidth="lg" padding='1.5rem'>
-      <Typography variant="h3" fontWeight='bold'>Mis Publicaciones</Typography>
-      <Stack gap='1.5rem' mt='1rem'>
+    <Container maxWidth="lg" padding="1.5rem">
+      <Typography variant="h3" fontWeight="bold">
+        Mis Publicaciones
+      </Typography>
+      <Stack gap="1.5rem" mt="1rem">
         {listMyClasses}
         {/* <MyClassListItem />
         <MyClassListItem />
         <MyClassListItem /> */}
       </Stack>
     </Container>
-  )
+  );
 }

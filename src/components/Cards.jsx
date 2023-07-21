@@ -10,7 +10,7 @@ import {
 import { Link } from "react-router-dom";
 
 export default function Cards({ clase }) {
-  const { id, img, name, price, id_usu, desc } = clase;
+  const { id, img, name, price, description } = clase;
 
   return (
     <>
@@ -41,7 +41,7 @@ export default function Cards({ clase }) {
               <Typography variant="h5" component="div">
                 {name}
               </Typography>
-              <Typography variant="body1">{desc}</Typography>
+              <Typography variant="body1">{description}</Typography>
             </Box>
             <Box>
               <Typography
