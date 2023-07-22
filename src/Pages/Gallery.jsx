@@ -11,9 +11,8 @@ export default function Gallery() {
       const res = await fetch(import.meta.env.VITE_URL + "classes", {
         method: "GET",
       });
-
       const data = await res.json();
-      console.log(data.result);
+
       setClases(data.result);
     } catch (error) {
       console.log(error);
@@ -23,7 +22,7 @@ export default function Gallery() {
   useEffect(() => {
     getClases();
   }, []);
-  console.log(clases);
+
   return (
     <>
       <Container>

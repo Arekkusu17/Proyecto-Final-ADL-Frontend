@@ -1,6 +1,6 @@
 import { Container, Stack, Typography } from "@mui/material";
 import MyClassListItem from "../components/myClasses/myClassListItem";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function MyClasses() {
   const token = localStorage.getItem("token");
