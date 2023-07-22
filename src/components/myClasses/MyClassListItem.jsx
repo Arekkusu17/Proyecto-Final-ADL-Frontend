@@ -18,6 +18,9 @@ export default function MyClassListItem({ myClassItem }) {
   const handleViewProduct = (id) => {
     navigate(`/infoClase/${id}`);
   };
+  const handleModifyProduct = (id) => {
+    navigate(`/dashboard/modifyPost/${id}`);
+  };
 
   return (
     <Box component={Paper} elevation={6} padding="1rem">
@@ -87,7 +90,10 @@ export default function MyClassListItem({ myClassItem }) {
               >
                 <PreviewIcon color="light" />
               </Button>
-              <Button color="primary">
+              <Button
+                color="primary"
+                onClick={() => handleModifyProduct(myClassItem.id)}
+              >
                 <EditIcon color="light" />
               </Button>
               <Button color="danger">

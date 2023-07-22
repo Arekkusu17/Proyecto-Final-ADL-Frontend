@@ -1,7 +1,8 @@
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-export default function CreatePost() {
+export default function ModifyPost() {
   const token = localStorage.getItem("token");
   const [newPostDetails, setNewPostDetails] = useState({
     name: "",
@@ -12,6 +13,28 @@ export default function CreatePost() {
     schedule: "",
     img: "",
   });
+
+  const [clases, setClases] = useState([]);
+  const { id } = useParams();
+
+  console.log(id);
+
+  const getClases = async () => {
+    try {
+      const res = await fetch(import.meta.env.VITE_URL + "classes/" + id, {
+        method: "GET",
+      });
+      const data = await res.json();
+      console.log(data.result);
+      setClases(data.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getClases();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,12 +75,12 @@ export default function CreatePost() {
     >
       <Stack gap="1.5rem" mt="1rem">
         <Typography variant="h3" fontWeight="bold">
-          CREAR PUBLICACIÓN
+          MODIFICAR PUBLICACIÓN
         </Typography>
         <Stack gap="1rem" direction="row">
           <TextField
             fullWidth
-            value={newPostDetails?.subject || ""}
+            value={newPostDetails?.subject || clases.subject}
             label="Asignatura"
             type="text"
             placeholder="Asignatura..."

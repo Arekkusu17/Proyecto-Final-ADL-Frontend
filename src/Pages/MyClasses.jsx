@@ -1,6 +1,6 @@
 import { Container, Stack, Typography } from "@mui/material";
 import MyClassListItem from "../components/myClasses/myClassListItem";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function MyClasses() {
   const token = localStorage.getItem("token");
@@ -39,9 +39,6 @@ export default function MyClasses() {
       </Typography>
       <Stack gap="1.5rem" mt="1rem">
         {listMyClasses}
-        {/* <MyClassListItem />
-        <MyClassListItem />
-        <MyClassListItem /> */}
       </Stack>
     </Container>
   );
