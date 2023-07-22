@@ -2,95 +2,150 @@ import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 
 export default function CreatePost() {
-
+  const token = localStorage.getItem("token");
   const [newPostDetails, setNewPostDetails] = useState({
-    name: '',
-    desc: '',
-    materia: '',
-    price: '',
-    nivel: '',
-    horario: '',
-    img: ''
-  })
-
+    name: "",
+    description: "",
+    subject: "",
+    price: "",
+    level: "",
+    schedule: "",
+    img: "",
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const { subject, name, price, level, description, schedule, img } =
+      newPostDetails;
+    console.log(subject);
     try {
-      console.log("aqui")
-      // Funciones para actualizar 
-      console.log('Creado!', newPostDetails)
+      const res = await fetch(import.meta.env.VITE_URL + "classes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          subject,
+          name,
+          price,
+          level,
+          description,
+          schedule,
+          img,
+        }),
+      });
+      const data = await res.json();
+
+      console.log("Creado!", data);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
-    <Container maxWidth="md" component='form' padding='1.5rem' onSubmit={handleSubmit}>
-      <Stack gap='1.5rem' mt='1rem'>
-        <Typography variant="h3" fontWeight='bold'>CREAR PUBLICACIÓN</Typography>
-        <Stack gap='1rem' direction='row'>
+    <Container
+      maxWidth="md"
+      component="form"
+      padding="1.5rem"
+      onSubmit={handleSubmit}
+    >
+      <Stack gap="1.5rem" mt="1rem">
+        <Typography variant="h3" fontWeight="bold">
+          CREAR PUBLICACIÓN
+        </Typography>
+        <Stack gap="1rem" direction="row">
           <TextField
-            value={newPostDetails?.name || ''}
+            fullWidth
+            value={newPostDetails?.subject || ""}
+            label="Asignatura"
+            type="text"
+            placeholder="Asignatura..."
+            required
+            onChange={(e) => {
+              setNewPostDetails({ ...newPostDetails, subject: e.target.value });
+            }}
+          />
+          <TextField
+            value={newPostDetails?.name || ""}
             fullWidth
             label="Nombre"
             type="text"
             placeholder="Nombre de la publicación..."
-            onChange={(e) => { setNewPostDetails({ ...newPostDetails, name: e.target.value }) }}
-          />
-          <TextField
-            fullWidth
-            value={newPostDetails?.materia || ''}
-            label="Asignatura"
-            type="text"
-            placeholder="Asignatura..."
-            onChange={(e) => { setNewPostDetails({ ...newPostDetails, materia: e.target.value }) }}
+            required
+            onChange={(e) => {
+              setNewPostDetails({ ...newPostDetails, name: e.target.value });
+            }}
           />
         </Stack>
-        <Stack gap='1rem' direction='row'>
+        <Stack gap="1rem" direction="row">
           <TextField
             fullWidth
-            value={newPostDetails?.price || ''}
+            value={newPostDetails?.price || ""}
             label="Precio"
             type="number"
             placeholder="Precio..."
-            onChange={(e) => { setNewPostDetails({ ...newPostDetails, price: e.target.value }) }}
+            required
+            onChange={(e) => {
+              setNewPostDetails({ ...newPostDetails, price: e.target.value });
+            }}
           />
           <TextField
             fullWidth
-            value={newPostDetails?.nivel || ''}
+            value={newPostDetails?.level || ""}
             label="Nivel"
             type="text"
             placeholder="Nivel..."
-            onChange={(e) => { setNewPostDetails({ ...newPostDetails, nivel: e.target.value }) }}
+            required
+            onChange={(e) => {
+              setNewPostDetails({ ...newPostDetails, level: e.target.value });
+            }}
           />
         </Stack>
         <TextField
-          value={newPostDetails?.desc || ''}
+          value={newPostDetails?.description || ""}
           multiline
           maxRows={5}
           label="Descripcion"
           type="text"
           placeholder="Descripcion de la publicación..."
-          onChange={(e) => { setNewPostDetails({ ...newPostDetails, desc: e.target.value }) }}
+          required
+          onChange={(e) => {
+            setNewPostDetails({
+              ...newPostDetails,
+              description: e.target.value,
+            });
+          }}
         />
         <TextField
-          value={newPostDetails?.horario || ''}
+          value={newPostDetails?.schedule || ""}
           label="Horario"
           type="text"
           placeholder="Días de clase..."
-          onChange={(e) => { setNewPostDetails({ ...newPostDetails, horario: e.target.value }) }}
+          required
+          onChange={(e) => {
+            setNewPostDetails({ ...newPostDetails, schedule: e.target.value });
+          }}
         />
         <TextField
-          value={newPostDetails?.img || ''}
+          value={newPostDetails?.img || ""}
           label="Link Imagen"
           type="text"
           placeholder="Enlace a la imagen de la publicación..."
-          onChange={(e) => { setNewPostDetails({ ...newPostDetails, img: e.target.value }) }}
+          required
+          onChange={(e) => {
+            setNewPostDetails({ ...newPostDetails, img: e.target.value });
+          }}
         />
-        <Button variant="contained" color="primary" type="submit" sx={{ width: '100%' }}>Crear Publicación</Button>
-
+        <Button
+          variant="contained"
+          color="primary"
+          type="submit"
+          sx={{ width: "100%" }}
+        >
+          Crear Publicación
+        </Button>
       </Stack>
     </Container>
-  )
+  );
 }

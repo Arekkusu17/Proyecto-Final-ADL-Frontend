@@ -39,9 +39,6 @@ export default function MyClasses() {
       </Typography>
       <Stack gap="1.5rem" mt="1rem">
         {listMyClasses}
-        {/* <MyClassListItem />
-        <MyClassListItem />
-        <MyClassListItem /> */}
       </Stack>
     </Container>
   );
