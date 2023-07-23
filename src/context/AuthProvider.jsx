@@ -18,13 +18,15 @@ const AuthProvider = ({ children }) => {
           Authorization: `Bearer ${access_token}`,
         },
       });
-      const data = await res.json();
-      setUser(data);
+      const { result } = await res.json();
+      setUser(result);
     } catch (error) {
       console.log(error);
       setUser(false);
     }
   };
+
+
 
   const saveToken = async (access_token) => {
     try {
@@ -32,7 +34,6 @@ const AuthProvider = ({ children }) => {
       setToken(access_token);
       await getProfileUser(access_token);
       localStorage.setItem("token", access_token);
-      // await login()
     } catch (error) {
       console.log(error);
     } finally {
