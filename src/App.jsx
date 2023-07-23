@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { Container, Stack } from "@mui/material";
 import { Route, Routes } from "react-router-dom";
 
-import { AuthContext } from "./context/AuthProvider";
-import SaleContextProvider from "./context/SaleContext";
-import CommentsProvider from "./context/CommentsProvider";
-import FavoritesProvider from "./context/FavoritesProvider";
+import { AuthContext } from "./Context/AuthProvider";
+import SaleContextProvider from "./Context/SaleContext";
+import CommentsProvider from "./Context/CommentsProvider";
+import FavoritesProvider from "./Context/FavoritesProvider";
 
 import Navbar from "./components/navbar/Navbar";
 import PacmanLoader from "react-spinners/PacmanLoader";

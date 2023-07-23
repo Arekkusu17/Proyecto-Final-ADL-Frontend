@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../Context/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import { Public } from "../components/routesProtection/public";
 import Swal from "sweetalert2";

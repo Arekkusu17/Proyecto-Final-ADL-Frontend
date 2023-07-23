@@ -1,5 +1,5 @@
 import { Avatar, Box, Button, Stack, Typography } from "@mui/material";
-import { SaleUseContext } from "../../context/SaleContext";
+import { SaleUseContext } from "../../Context/SaleContext";
 import { useEffect } from "react";
 
 export default function CartItemDrawer({ product }) {

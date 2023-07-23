@@ -1,6 +1,6 @@
 import { Button, Container, Rating, Stack, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
-import { AuthContext } from "../../context/AuthProvider";
+import { AuthContext } from "../../Context/AuthProvider";
 
 export default function NewComment({ classId }) {
   const [newCommentsDetails, setNewCommentsDetails] = useState({ rating: 0, comment: '' })

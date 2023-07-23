@@ -1,6 +1,6 @@
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../Context/AuthProvider";
 
 export default function EditProfile() {
   // TODO LA INFO DEL USER DEBE VENIR DE UN PROVIDER, EL MISMO QUE ES UTIL PARA LA VIEW PERFIL
