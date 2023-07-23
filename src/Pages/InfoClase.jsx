@@ -5,18 +5,18 @@ import CardInfo from "../components/CardInfo";
 import PacmanLoader from "react-spinners/PacmanLoader";
 
 export default function InfoClase() {
-  const id = useParams();
+  const { id } = useParams();
   const [clases, setClases] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const getClase = async () => {
     try {
-      const res = await fetch("/Clases.json");
+      const res = await fetch(import.meta.env.VITE_URL + "classes/" + id, {
+        method: "GET",
+      });
       const data = await res.json();
 
-      const buscar = data.find((p) => p.id === id.id);
-
-      setClases(buscar);
+      setClases(data.result);
       setLoading(false);
     } catch (error) {
       console.log(error);

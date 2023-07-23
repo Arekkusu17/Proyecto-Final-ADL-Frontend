@@ -8,10 +8,12 @@ export default function Gallery() {
 
   const getClases = async () => {
     try {
-      const res = await fetch("Clases.json");
+      const res = await fetch(import.meta.env.VITE_URL + "classes", {
+        method: "GET",
+      });
       const data = await res.json();
-      console.log(data);
-      setClases(data);
+
+      setClases(data.result);
     } catch (error) {
       console.log(error);
     }
@@ -33,7 +35,6 @@ export default function Gallery() {
         </Grid>
       </Container>
       <Footer />
-
     </>
   );
 }

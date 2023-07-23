@@ -1,30 +1,28 @@
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Alert, AlertTitle, Container, Stack, Typography } from "@mui/material";
 import FavoriteListItem from "../components/favorites/favoriteListItem";
 import { FavoritesContext } from "../context/FavoritesProvider";
 
 import { PacmanLoader } from "react-spinners";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 
 
 export default function Favorites() {
 
 
-  const { favorites, getFavorites, loadingFavorites } = useContext(FavoritesContext);
+  const { favorites } = useContext(FavoritesContext);
 
-  useEffect(() => {
-    getFavorites();
-  }, []);
-
+  console.log(favorites)
 
   const listFavorites = favorites.map((favoriteItem) => {
     return (
-      <FavoriteListItem key={favoriteItem.id} favoriteItem={favoriteItem} />
+      <FavoriteListItem key={favoriteItem.name} favoriteItem={favoriteItem} />
     )
   });
 
   return (
 
-    <Container maxWidth="md" padding='1.5rem'>
+    <Container maxWidth="md" padding='1.5rem' gap='1rem'>
+
       <Stack gap='1.5rem' mt='1rem'>
         <Typography variant="h3" fontWeight='bold'>Mis Favoritos</Typography>
         {/* The loader will be implemented later on the project */}
@@ -32,10 +30,20 @@ export default function Favorites() {
           color='#3A98B9'
           size={47}
         /> </Box>) : listFavorites} */}
-        {listFavorites}
 
-        {/* {listFavorites} */}
+
+        {favorites.length === 0 ?
+          <Container>
+            <Alert variant="outlined" severity="info">
+              <AlertTitle>Tu Lista de Favoritos se encuentra vacía.</AlertTitle>
+              <Typography ><strong>¡Te invitamos a revisar nuestra galería!</strong> y marcar como favoritas las clases que te interesen.
+              </Typography>
+            </Alert>
+          </Container> : listFavorites}
+
       </Stack>
+
+
     </Container>
   )
 }
