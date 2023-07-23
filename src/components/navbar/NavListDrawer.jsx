@@ -3,7 +3,7 @@ import { Box } from "@mui/system";
 import { List, ListItem, ListItemText, ListItemButton, Toolbar } from "@mui/material"
 import { NavLink } from "react-router-dom"
 import { useContext } from "react";
-import { AuthContext } from "../../context/AuthProvider";
+import { AuthContext } from "../../Context/AuthProvider";
 
 
 export default function NavListDrawer({ setOpen }) {

@@ -1,6 +1,6 @@
 import { Stack, Avatar, Typography, Paper, Box } from "@mui/material";
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../Context/AuthProvider";
 
 
 export default function Profile() {
