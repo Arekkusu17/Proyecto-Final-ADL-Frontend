@@ -1,8 +1,11 @@
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function CreatePost() {
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
   const [newPostDetails, setNewPostDetails] = useState({
     name: "",
     description: "",
@@ -17,7 +20,6 @@ export default function CreatePost() {
     e.preventDefault();
     const { subject, name, price, level, description, schedule, img } =
       newPostDetails;
-    console.log(subject);
     try {
       const res = await fetch(import.meta.env.VITE_URL + "classes", {
         method: "POST",
@@ -38,6 +40,16 @@ export default function CreatePost() {
       const data = await res.json();
 
       console.log("Creado!", data);
+      data
+        ? Swal.fire({
+            icon: "success",
+            title: "Clase Registrada con Exito",
+            confirmButtonText: "Aceptar",
+            didClose: () => {
+              navigate("/dashboard/classes");
+            },
+          })
+        : null;
     } catch (error) {
       console.log(error);
     }
