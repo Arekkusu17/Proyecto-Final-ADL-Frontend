@@ -1,6 +1,6 @@
 import { Box, Container } from "@mui/material";
 import { Outlet } from "react-router-dom";
-import MobileNavigationDashboard from "../components/dashboard/mobileNavigationDashboard";
+import MobileNavigationDashboard from "../components/dashboard/MobileNavigationDashboard";
 import SideBarNavigationDashboard from "../components/dashboard/SideBarNavigationDashboard";
 
 

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react"
 import CommentsListItem from "./CommentsListItem"
 import { CommentsContext } from "../../Context/CommentsProvider"
-import NewComment from "./newComment"
+import NewComment from "./NewComment"
 
 export default function CommentsSection({ classId }) {
   const { comments, getClassComments, setComments } = useContext(CommentsContext)
