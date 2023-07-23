@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { Public } from "../components/routesProtection/public";
+import { Public } from "../components/routesProtection/Public";
 import Swal from "sweetalert2";
 
 export default function Register() {
