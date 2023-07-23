@@ -1,6 +1,6 @@
 import { Alert, AlertTitle, Container, Stack, Typography } from "@mui/material";
 import FavoriteListItem from "../components/favorites/favoriteListItem";
-import { FavoritesContext } from "../context/FavoritesProvider";
+import { FavoritesContext } from "../Context/FavoritesProvider";
 
 import { PacmanLoader } from "react-spinners";
 import { useContext } from "react";

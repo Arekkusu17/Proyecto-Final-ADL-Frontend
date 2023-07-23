@@ -15,10 +15,10 @@ import {
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import { SaleUseContext } from "../context/SaleContext";
+import { SaleUseContext } from "../Context/SaleContext";
 import { useContext, useEffect, useState } from "react";
-import { FavoritesContext } from "../context/FavoritesProvider";
-import { AuthContext } from "../context/AuthProvider";
+import { FavoritesContext } from "../Context/FavoritesProvider";
+import { AuthContext } from "../Context/AuthProvider";
 import CommentsSection from "./comments/CommentsSection";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";

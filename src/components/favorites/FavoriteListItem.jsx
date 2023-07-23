@@ -6,9 +6,9 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 import { useNavigate } from "react-router-dom";
 
-import { SaleUseContext } from "../../context/SaleContext";
+import { SaleUseContext } from "../../Context/SaleContext";
 import { useContext, useEffect } from "react";
-import { FavoritesContext } from "../../context/FavoritesProvider";
+import { FavoritesContext } from "../../Context/FavoritesProvider";
 
 
 

@@ -39,7 +39,7 @@ const theme = createTheme({
 
 import { BrowserRouter } from "react-router-dom";
 import { CssBaseline, ThemeProvider, createTheme } from "@mui/material";
-import AuthProvider from "./context/AuthProvider.jsx";
+import AuthProvider from "./Context/AuthProvider.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

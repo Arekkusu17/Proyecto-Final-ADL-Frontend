@@ -17,7 +17,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 import NavListDrawer from "./NavListDrawer";
 import CartDrawer from "../menuCart/CartDrawer";
 
-import { AuthContext } from "../../context/AuthProvider";
+import { AuthContext } from "../../Context/AuthProvider";
 
 import { useNavigate } from "react-router-dom";
 
