@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Box } from "@mui/system";
 import {
   Container,
@@ -40,7 +40,6 @@ export default function Navbar() {
 
   const { user, logout } = useContext(AuthContext);
 
-  // const navLinks = !user ? publicNavLinks : privateNavLinks;
   const navigate = useNavigate();
 
   return (
