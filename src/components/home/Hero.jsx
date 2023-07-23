@@ -3,6 +3,9 @@ import HeroImage from "../../assets/img/heroImg.jpg";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
+
+  const handleClases = () => {};
+
   return (
     <>
       <Box>
@@ -38,7 +41,17 @@ export default function Hero() {
                 align="center"
                 sx={{ color: "white", mb: 2 }}
               >
-                One on One
+                DotStudent
+              </Typography>
+              <Typography
+                variant="body1"
+                color="textPrimary"
+                component="p"
+                align="center"
+                sx={{ color: "white", mb: 2 }}
+              >
+                Descubre una experiencia educativa única en nuestra plataforma
+                segura
               </Typography>
               <Typography
                 variant="body2"
@@ -47,13 +60,12 @@ export default function Hero() {
                 align="center"
                 sx={{ color: "white", mb: 2 }}
               >
-                Conecta, Aprende, Comparte: Tu plataforma segura para clases
-                face to face
+                "Conecta, Aprende, Comparte: Tu plataforma segura para clases
+                face to face".
               </Typography>
-              <Link to="/gallery" style={{ textDecoration: "none" }}>
-                <Button variant="contained" color="primary">
-                  Ver Clases
-                </Button>
+
+              <Link to={`/Gallery`} style={{ textDecoration: "none" }}>
+                <Button variant="contained">Ver Clases</Button>
               </Link>
             </Box>
           </Box>
