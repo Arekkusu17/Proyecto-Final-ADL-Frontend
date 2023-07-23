@@ -1,11 +1,14 @@
-import { Container, Stack, Typography } from "@mui/material";
+import { Alert, AlertTitle, Button, Container, Stack, Typography } from "@mui/material";
 import MyClassListItem from "../components/myClasses/myClassListItem";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function MyClasses() {
   const token = localStorage.getItem("token");
 
   const [clases, setClases] = useState([]);
+
+  const navigate = useNavigate()
 
   const getClases = async () => {
     try {
@@ -38,7 +41,14 @@ export default function MyClasses() {
         Mis Publicaciones
       </Typography>
       <Stack gap="1.5rem" mt="1rem">
-        {listMyClasses}
+        {clases.length === 0 ? <Container>
+          <Alert variant="outlined" severity="info">
+            <AlertTitle>No has realizado publicaciones.</AlertTitle>
+            <Typography >Recuerda que puedes ofrecer tus servicios mediante la creación de tu propia publicación. <strong>¡Te invitamos a revisar la sección Crear Publicación!</strong>
+            </Typography>
+            <Button variant="contained" onClick={() => { navigate("/dashboard/createpost") }}>Ir a Sección</Button>
+          </Alert>
+        </Container> : listMyClasses}
       </Stack>
     </Container>
   );
