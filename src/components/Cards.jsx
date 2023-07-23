@@ -1,8 +1,6 @@
 import {
   Box,
-  Button,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
   Typography,
@@ -14,6 +12,7 @@ export default function Cards({ clase }) {
 
   return (
     <>
+
       <Link to={`/infoClase/${id}`} style={{ textDecoration: "none" }}>
         <Card
           sx={{

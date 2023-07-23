@@ -1,17 +1,25 @@
 import {
+  Avatar,
   Box,
   Button,
   Card,
   CardContent,
   CardMedia,
+  Divider,
   Paper,
+  Rating,
+  Stack,
   Typography,
   styled,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { SaleUseContext } from "../context/SaleContext";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { FavoritesContext } from "../context/FavoritesProvider";
+import { AuthContext } from "../context/AuthProvider";
+import CommentsSection from "./comments/CommentsSection";
 
 export default function CardInfo({ clases }) {
   const {
@@ -26,16 +34,12 @@ export default function CardInfo({ clases }) {
     schedule,
   } = clases;
   const { agregarClase } = SaleUseContext();
+  const { favorites, addToFavorites, removeFromFavorites } = useContext(FavoritesContext)
+  const { token } = useContext(AuthContext)
   const [open, setOpen] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(null)
 
-  const Img = styled("img")({
-    width: "50%",
-    height: "100%",
-    objectFit: "cover",
-    objectPosition: "center",
-  });
-
-  const handleAnadir = (e) => {
+  const handleAddToCart = (e) => {
     e.preventDefault();
     const newProduct = {
       id: clases.id,
@@ -46,6 +50,24 @@ export default function CardInfo({ clases }) {
     };
     agregarClase(newProduct);
   };
+
+  const handleAddToFavorites = (id) => {
+    const isAlreadyInFavorites = favorites.some((item) => item.id_classes === id);
+    if (isAlreadyInFavorites) {
+      return; // Abort the function if the item is already in favorites
+    }
+    addToFavorites(id);
+    setIsFavorited(true)
+  }
+
+  const handleRemoveFromFavorites = (id) => {
+    removeFromFavorites(id)
+    setIsFavorited(false)
+  }
+
+  useEffect(() => {
+    setIsFavorited(favorites.some((item) => item.id_classes === id))
+  }, [])
 
   return (
     <>
@@ -104,22 +126,26 @@ export default function CardInfo({ clases }) {
                   fullWidth
                   variant="contained"
                   color="success"
-                  onClick={handleAnadir}
+                  onClick={handleAddToCart}
                 >
                   <AddShoppingCartIcon fontWeight="bold" />
                   Carro
                 </Button>
-                <Button fullWidth variant="contained" color="primary">
-                  <FavoriteBorderIcon fontWeight="bold" />
-                  Favoritos
-                </Button>
+
+                {isFavorited ?
+                  <Button fullWidth variant="outlined" color="primary" onClick={() => handleRemoveFromFavorites(id)}>
+                    <FavoriteIcon fontWeight="bold" />
+                    Eliminar Favorito
+                  </Button> : <Button fullWidth variant="contained" color="primary" onClick={() => handleAddToFavorites(id)}>
+                    <FavoriteBorderIcon fontWeight="bold" />
+                    Favoritos
+                  </Button>
+                }
               </Box>
             </CardContent>
-            <Box
-              sx={{ display: "flex", alignItems: "center", pl: 1, pb: 1 }}
-            ></Box>
           </Box>
         </Card>
+        <CommentsSection classId={id} />
       </Paper>
     </>
   );
