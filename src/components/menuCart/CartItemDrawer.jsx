@@ -5,8 +5,6 @@ import { useEffect } from "react";
 export default function CartItemDrawer({ product }) {
   const { total, agregarClase, eliminarClase } = SaleUseContext();
 
-  console.log(product);
-
   const handleMas = (id) => {
     const newProduct = {
       id: id,

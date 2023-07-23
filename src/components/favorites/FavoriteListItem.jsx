@@ -7,13 +7,17 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { useNavigate } from "react-router-dom";
 
 import { SaleUseContext } from "../../context/SaleContext";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { FavoritesContext } from "../../context/FavoritesProvider";
 
 
 
 
 export default function FavoriteListItem({ favoriteItem }) {
+  console.log(favoriteItem)
   const { total, agregarClase } = SaleUseContext();
+  const { removeFromFavorites } = useContext(FavoritesContext);
+
 
   const navigate = useNavigate()
 
@@ -33,7 +37,7 @@ export default function FavoriteListItem({ favoriteItem }) {
   }
 
   const handleDeleteFavorite = (id) => {
-    // TODO
+    removeFromFavorites(id)
   }
 
   useEffect(() => { }, [total]);
@@ -46,16 +50,18 @@ export default function FavoriteListItem({ favoriteItem }) {
         gap="0.5rem"
         sx={{ flexDirection: { xs: 'column', md: 'row' } }}>
         <Avatar variant="square" sx={{ width: '150px', height: '150px', bgcolor: 'pink' }} src={favoriteItem.img} />
-        <Stack alignContent='flex-start'>
-          <Typography color='black'>{favoriteItem.name}</Typography>
-          <Typography>{favoriteItem.id}</Typography>
+        <Stack alignContent='flex-start' >
+          <Typography textTransform='capitalize' fontWeight='bold' color='black'>{favoriteItem.name}</Typography>
+          <Typography textTransform='uppercase' mt='0.5rem'>{favoriteItem.level}</Typography>
+          <Typography mt='0.5rem'>{favoriteItem.description}</Typography>
+
         </Stack>
         <Stack>
           <Typography variant="h4" align="center">${favoriteItem.price.toLocaleString("es-CL")}</Typography>
           <Stack direction='row' >
             <ButtonGroup variant="contained" aria-label="outlined primary button group">
-              <Button color='primary' onClick={() => { handleViewProduct(favoriteItem.id) }}><PreviewIcon color="light" /></Button>
-              <Button color='danger'><ClearIcon color="light" /></Button>
+              <Button color='primary' onClick={() => { handleViewProduct(favoriteItem.id_classes) }}><PreviewIcon color="light" /></Button>
+              <Button color='danger' onClick={() => { handleDeleteFavorite(favoriteItem.id_classes) }}><ClearIcon color="light" /></Button>
               <Button color='success' onClick={() => { handleAddToCart(favoriteItem) }}><AddShoppingCartIcon /></Button>
             </ButtonGroup>
           </Stack>
