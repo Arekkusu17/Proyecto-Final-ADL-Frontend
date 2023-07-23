@@ -41,9 +41,9 @@ export default function MenuCart() {
     setopenMenuCart(false);
   };
 
-  const listCartItems = data.products.map((product) => {
+  const listCartItems = data?.products.map((product) => {
     return (
-      <Box key={product.id}>
+      <Box key={product.name}>
         <CartItemDrawer product={product} />
       </Box>)
   })
