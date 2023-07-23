@@ -8,6 +8,7 @@ const CommentsProvider = ({ children }) => {
 
   const getClassComments = async (id_class) => {
     try {
+
       const res = await fetch(import.meta.env.VITE_URL + `comments/class/${id_class}`, {
         method: "GET"
       });
@@ -20,7 +21,7 @@ const CommentsProvider = ({ children }) => {
   }
 
   return (
-    <CommentsContext.Provider value={{ comments, getClassComments }}>
+    <CommentsContext.Provider value={{ comments, getClassComments, setComments }}>
       {children}
     </CommentsContext.Provider>)
 }

@@ -1,19 +1,24 @@
-import { useContext, useEffect } from "react"
+import { useContext, useEffect, useState } from "react"
 import CommentsListItem from "./CommentsListItem"
 import { CommentsContext } from "../../context/CommentsProvider"
 import NewComment from "./newComment"
 
 export default function CommentsSection({ classId }) {
-  const { comments, getClassComments } = useContext(CommentsContext)
+  const { comments, getClassComments, setComments } = useContext(CommentsContext)
+  const [loadingComments, setLoadingComments] = useState(null)
 
 
   useEffect(() => {
+    setComments([])
+    setLoadingComments(true)
     getClassComments(classId)
+    setLoadingComments(false)
   }, [])
 
   const listComments = comments.map((commentItem) => {
     return (
       <CommentsListItem key={commentItem.id} commentItem={commentItem} />
+
     )
   })
 
@@ -21,6 +26,6 @@ export default function CommentsSection({ classId }) {
   return (
     <>
       <NewComment classId={classId} />
-      {comments.length > 0 ? listComments : <div>Vacio de comments</div>}
+      {loadingComments ? <div>nada por aqui</div> : listComments}
     </>)
 }

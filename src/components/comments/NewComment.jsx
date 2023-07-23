@@ -11,7 +11,6 @@ export default function NewComment({ classId }) {
     e.preventDefault();
     const { rating, comment } = newCommentsDetails
     const id_classes = classId
-    console.log(rating, comment, id_classes)
     try {
       const resComment = await fetch(import.meta.env.VITE_URL + `comments`, {
         method: "POST",
@@ -46,35 +45,37 @@ export default function NewComment({ classId }) {
 
   return (
     <>
-      <Container sx={{ margin: '2rem auto' }} component="form" onSubmit={handleCommentSubmit}>
-        <Stack gap="0.5rem" alignItems="flex-start">
-          <Typography fontWeight='bold' variant="h5">Escribe tu comentario:</Typography>
-          <Stack>
-            <Typography>¿Cómo evaluarías el servicio?</Typography>
-            <Rating
-              name="simple-controlled"
-              value={newCommentsDetails.rating}
-              onChange={(event, newValue) => {
-                setNewCommentsDetails({ ...setNewCommentsDetails, rating: newValue });
-              }}
-            // precision={0.5} 
-
-            />
+      {!token ? <Typography m='1rem' variant="h6">Necesitas estar registrado para dejar un comentario</Typography > :
+        <Container sx={{ margin: '2rem auto' }} component="form" onSubmit={handleCommentSubmit}>
+          <Stack gap="0.5rem" alignItems="flex-start">
+            <Typography fontWeight='bold' variant="h5">Escribe tu comentario:</Typography>
+            <Stack>
+              <Typography>¿Cómo evaluarías el servicio?</Typography>
+              <Rating
+                name="simple-controlled"
+                value={newCommentsDetails.rating}
+                onChange={(event, newValue) => {
+                  setNewCommentsDetails({ ...setNewCommentsDetails, rating: newValue });
+                }}
+              // precision={0.5} 
+              />
+            </Stack>
+            <TextField
+              fullWidth
+              value={newCommentsDetails.comment}
+              rows={3}
+              type="text"
+              placeholder="Deja tu comentario, de esta forma podrás ayudar a los demás usuarios ..."
+              required
+              disabled
+              onChange={(e) => {
+                setNewCommentsDetails({ ...newCommentsDetails, comment: e.target.value });
+              }} />
+            <Button variant="contained" sx={{ alignSelf: 'flex-end' }} type="submit" >Enviar Comentario</Button>
           </Stack>
-          <TextField
-            fullWidth
-            value={newCommentsDetails.comment}
-            rows={3}
-            type="text"
-            placeholder="Deja tu comentario, de esta forma podrás ayudar a los demás usuarios ..."
-            required
-            onChange={(e) => {
-              setNewCommentsDetails({ ...newCommentsDetails, comment: e.target.value });
-            }} />
-          <Button variant="contained" sx={{ alignSelf: 'flex-end' }} type="submit" >Enviar Comentario</Button>
+        </Container>
+      }
 
-        </Stack>
-      </Container>
     </>
   )
 }

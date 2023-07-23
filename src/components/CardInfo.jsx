@@ -20,6 +20,8 @@ import { useContext, useEffect, useState } from "react";
 import { FavoritesContext } from "../context/FavoritesProvider";
 import { AuthContext } from "../context/AuthProvider";
 import CommentsSection from "./comments/CommentsSection";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function CardInfo({ clases }) {
   const {
@@ -39,6 +41,8 @@ export default function CardInfo({ clases }) {
   const [open, setOpen] = useState(false);
   const [isFavorited, setIsFavorited] = useState(null)
 
+  const navigate = useNavigate()
+
   const handleAddToCart = (e) => {
     e.preventDefault();
     const newProduct = {
@@ -52,12 +56,31 @@ export default function CardInfo({ clases }) {
   };
 
   const handleAddToFavorites = (id) => {
-    const isAlreadyInFavorites = favorites.some((item) => item.id_classes === id);
-    if (isAlreadyInFavorites) {
-      return; // Abort the function if the item is already in favorites
+    if (token) {
+      const isAlreadyInFavorites = favorites.some((item) => item.id_classes === id);
+      if (isAlreadyInFavorites) {
+        return; // Abort the function if the item is already in favorites
+      }
+      addToFavorites(id);
+      setIsFavorited(true)
+    } else {
+      Swal.fire({
+        title: '¡Necesitas estar Registrado!',
+        text: "Para agregar un producto a favorites, necesitas iniar sesión.",
+        icon: 'warning',
+        showDenyButton: true,
+        denyButtonColor: '#3A98B9',
+        denyButtonText: 'Registrarse',
+        confirmButtonColor: '#3A98B9',
+        confirmButtonText: 'Iniciar Sesión'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login")
+        } else if (result.isDenied) {
+          navigate("/register")
+        }
+      })
     }
-    addToFavorites(id);
-    setIsFavorited(true)
   }
 
   const handleRemoveFromFavorites = (id) => {
@@ -66,7 +89,9 @@ export default function CardInfo({ clases }) {
   }
 
   useEffect(() => {
-    setIsFavorited(favorites.some((item) => item.id_classes === id))
+    if (!token) {
+      setIsFavorited(false)
+    }
   }, [])
 
   return (
@@ -87,7 +112,7 @@ export default function CardInfo({ clases }) {
           />
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             <CardContent sx={{ flex: "1 0 auto" }}>
-              <Typography fontWeight="bold" component="div" variant="h4">
+              <Typography textTransform='capitalize' fontWeight="bold" component="div" variant="h4">
                 {name}
               </Typography>
               <Typography
@@ -136,7 +161,8 @@ export default function CardInfo({ clases }) {
                   <Button fullWidth variant="outlined" color="primary" onClick={() => handleRemoveFromFavorites(id)}>
                     <FavoriteIcon fontWeight="bold" />
                     Eliminar Favorito
-                  </Button> : <Button fullWidth variant="contained" color="primary" onClick={() => handleAddToFavorites(id)}>
+                  </Button> :
+                  <Button fullWidth variant="contained" color="primary" onClick={() => handleAddToFavorites(id)}>
                     <FavoriteBorderIcon fontWeight="bold" />
                     Favoritos
                   </Button>

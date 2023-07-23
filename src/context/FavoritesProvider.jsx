@@ -64,7 +64,9 @@ const FavoritesProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    getFavorites();
+    if (token) {
+      getFavorites();
+    }
   }, []);
 
   return (
