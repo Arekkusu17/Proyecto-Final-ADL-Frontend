@@ -1,26 +1,48 @@
 /* eslint-disable react/prop-types */
 import { Box } from "@mui/system";
-import { List, ListItem, ListItemText, ListItemButton } from "@mui/material"
+import { List, ListItem, ListItemText, ListItemButton, Toolbar } from "@mui/material"
 import { NavLink } from "react-router-dom"
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthProvider";
 
 
-export default function NavListDrawer({ NavLinks, setOpen }) {
+export default function NavListDrawer({ setOpen }) {
+
+  const navLinks = [
+    { to: "/gallery", text: "Galeria", private: false },
+    { to: "/login", text: "Iniciar Sesion", private: false, publicOnly: true },
+    { to: "/register", text: "Regristarse", private: false, publicOnly: true },
+    { to: "/dashboard", text: "Perfil", private: true }
+  ]
+  const { user, logout } = useContext(AuthContext)
   return (
-    <Box >
+    <Box mt='1rem'>
       <nav>
+        <Toolbar></Toolbar>
         <List>
           {
-            NavLinks.map(item => (
-              <ListItem key={item.title}>
-                <ListItemButton
-                  component={NavLink}
-                  to={item.path}
-                  onClick={() => setOpen(false)}>
-                  <ListItemText primary={item.title}></ListItemText>
-                </ListItemButton>
-              </ListItem>
-            ))
+            navLinks.map((item) => {
+              if (item.private && !user) return null;
+              if (item.publicOnly && user) return null;
+              return (
+                <ListItem key={item.text}>
+                  <ListItemButton
+                    component={NavLink}
+                    to={item.to}
+                    onClick={() => setOpen(false)}>
+                    <ListItemText primary={item.text}></ListItemText>
+                  </ListItemButton>
+                </ListItem>)
+            })
           }
+          {user && (<ListItem >
+            <ListItemButton
+              component={NavLink}
+              // to={/logout}
+              onClick={() => { logout(); setOpen(false) }}>
+              <ListItemText primary={"Cerrar Sesion"}></ListItemText>
+            </ListItemButton>
+          </ListItem>)}
         </List>
       </nav>
     </Box>

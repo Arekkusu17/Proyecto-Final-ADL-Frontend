@@ -1,32 +1,49 @@
 import {
+  Avatar,
   Box,
   Button,
   Card,
   CardContent,
   CardMedia,
+  Divider,
   Paper,
+  Rating,
+  Stack,
   Typography,
   styled,
 } from "@mui/material";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { SaleUseContext } from "../context/SaleContext";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { FavoritesContext } from "../context/FavoritesProvider";
+import { AuthContext } from "../context/AuthProvider";
+import CommentsSection from "./comments/CommentsSection";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function CardInfo({ clases }) {
-  const { id, img, name, price, id_usu, desc, asignatura, nivel, horario } =
-    clases;
+  const {
+    id,
+    img,
+    name,
+    price,
+    id_usu,
+    description,
+    subject,
+    level,
+    schedule,
+  } = clases;
   const { agregarClase } = SaleUseContext();
+  const { favorites, addToFavorites, removeFromFavorites } = useContext(FavoritesContext)
+  const { token } = useContext(AuthContext)
   const [open, setOpen] = useState(false);
+  const [isFavorited, setIsFavorited] = useState(null)
 
-  const Img = styled("img")({
-    width: "50%",
-    height: "100%",
-    objectFit: "cover",
-    objectPosition: "center",
-  });
+  const navigate = useNavigate()
 
-  const handleAnadir = (e) => {
+  const handleAddToCart = (e) => {
     e.preventDefault();
     const newProduct = {
       id: clases.id,
@@ -38,37 +55,88 @@ export default function CardInfo({ clases }) {
     agregarClase(newProduct);
   };
 
+  const handleAddToFavorites = (id) => {
+    if (token) {
+      const isAlreadyInFavorites = favorites.some((item) => item.id_classes === id);
+      if (isAlreadyInFavorites) {
+        return; // Abort the function if the item is already in favorites
+      }
+      addToFavorites(id);
+      setIsFavorited(true)
+    } else {
+      Swal.fire({
+        title: '¡Necesitas estar Registrado!',
+        text: "Para agregar un producto a favorites, necesitas iniar sesión.",
+        icon: 'warning',
+        showDenyButton: true,
+        denyButtonColor: '#3A98B9',
+        denyButtonText: 'Registrarse',
+        confirmButtonColor: '#3A98B9',
+        confirmButtonText: 'Iniciar Sesión'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login")
+        } else if (result.isDenied) {
+          navigate("/register")
+        }
+      })
+    }
+  }
+
+  const handleRemoveFromFavorites = (id) => {
+    removeFromFavorites(id)
+    setIsFavorited(false)
+  }
+
+  useEffect(() => {
+    if (!token) {
+      setIsFavorited(false)
+    }
+  }, [])
+
   return (
     <>
       <Paper elevation={15}>
-        <Card sx={{ display: 'flex', flexDirection: { xs: 'column', md: 'row' }, justifyContent: 'space-between' }}>
+        <Card
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: "space-between",
+          }}
+        >
           <CardMedia
             component="img"
-            sx={{ width: { xs: '100%', md: '50%' }, height: '500px' }}
+            sx={{ width: { xs: "100%", md: "50%" }, height: "500px" }}
             src={img}
             alt="Live from space album cover"
           />
-          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-            <CardContent sx={{ flex: '1 0 auto' }}>
-              <Typography fontWeight="bold" component="div" variant="h4" >
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            <CardContent sx={{ flex: "1 0 auto" }}>
+              <Typography textTransform='capitalize' fontWeight="bold" component="div" variant="h4">
                 {name}
               </Typography>
-              <Typography variant="subtitle1" color="text.secondary" component="div">
-                {asignatura}
+              <Typography
+                variant="subtitle1"
+                color="text.secondary"
+                component="div"
+              >
+                {subject}
               </Typography>
-              <Typography > Nivel: <strong>{nivel}</strong> </Typography>
+              <Typography>
+                {" "}
+                Nivel: <strong>{level}</strong>{" "}
+              </Typography>
 
-              <Typography fontWeight="bold"> Horarios: {horario} </Typography>
+              <Typography fontWeight="bold"> Horarios: {schedule} </Typography>
 
               <Typography fontWeight="bold" sx={{ mt: 3 }}>
-
                 Descripcion:{" "}
               </Typography>
               <Typography
                 textAlign="justify"
                 sx={{ mr: 3, mb: 3, gridColumn: "1 / span 2" }}
               >
-                {desc}
+                {description}
               </Typography>
               <Typography
                 variant="h5"
@@ -78,28 +146,32 @@ export default function CardInfo({ clases }) {
               >
                 Precio: ${price.toLocaleString("es-CL")}.
               </Typography>
-              <Box display='flex' justifyContent="space-between" gap='1rem'>
+              <Box display="flex" justifyContent="space-between" gap="1rem">
                 <Button
                   fullWidth
                   variant="contained"
                   color="success"
-                  onClick={handleAnadir}
+                  onClick={handleAddToCart}
                 >
                   <AddShoppingCartIcon fontWeight="bold" />
                   Carro
                 </Button>
-                <Button
-                  fullWidth
-                  variant="contained" color="primary" >
-                  <FavoriteBorderIcon fontWeight="bold" />
-                  Favoritos
-                </Button>
+
+                {isFavorited ?
+                  <Button fullWidth variant="outlined" color="primary" onClick={() => handleRemoveFromFavorites(id)}>
+                    <FavoriteIcon fontWeight="bold" />
+                    Eliminar Favorito
+                  </Button> :
+                  <Button fullWidth variant="contained" color="primary" onClick={() => handleAddToFavorites(id)}>
+                    <FavoriteBorderIcon fontWeight="bold" />
+                    Favoritos
+                  </Button>
+                }
               </Box>
             </CardContent>
-            <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-            </Box>
           </Box>
         </Card>
+        <CommentsSection classId={id} />
       </Paper>
     </>
   );

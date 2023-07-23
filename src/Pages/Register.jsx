@@ -7,6 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
+import { Public } from "../components/routesProtection/public";
 import Swal from "sweetalert2";
 
 export default function Register() {
@@ -30,6 +31,7 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     const data = {
       name: nombre,
       lastName: apellido,
@@ -38,7 +40,9 @@ export default function Register() {
     };
 
     try {
-      const response = await fetch("http://localhost:3000/api/users", {
+
+      const response = await fetch(import.meta.env.VITE_URL + "users", {
+
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -47,8 +51,6 @@ export default function Register() {
       });
 
       if (response.ok) {
-        const result = await response.json();
-        console.log("Respuesta:", result);
         Swal.fire({
           icon: "success",
           title: "Usuario Registrado con Exito",
@@ -58,75 +60,66 @@ export default function Register() {
           },
         });
       } else {
-        console.log("Error en la solicituda:", response.status);
-        console.log(response.result);
-        if (response.status === 701 || response.status === 702) {
-          Swal.fire({
-            icon: "error",
-            title:
-              response.status === 701
-                ? "Email ya se encuentra registrado"
-                : "Formato de email no válido",
-            confirmButtonText: "Aceptar",
-            didClose: () => {
-              window.location.href = "/register";
-            },
-          });
-        }
+        throw response;
       }
     } catch (error) {
-      console.error("Error en la solicitud:", error);
+      const msg = await error.json();
+      let msgError = msg.result;
+      !msgError ? (msgError = msg.error) : null;
+      Swal.fire({
+        icon: "error",
+        title: msgError,
+        confirmButtonText: "Aceptar",
+      });
     }
   };
 
   return (
     <>
-      <Container sx={{ p: "2rem" }}>
-        <Paper elevation={15} sx={{ width: "70%", margin: "0 auto" }}>
-          <form onSubmit={handleSubmit}>
-            <Box sx={{ flexGrow: 1, display: "grid", gap: 4, p: 3 }}>
-              <Typography variant="h4" textAlign="center" sx={{ my: 2 }}>
-                Registro
-              </Typography>
-              <TextField
-                label="Email"
-                type="email"
-                value={email}
-                onChange={handleEmail}
-                fullWidth
-                required
-              />
-              <TextField
-                label="Nombre"
-                type="text"
-                value={nombre}
-                onChange={handleNombre}
-                fullWidth
-                required
-              />
-              <TextField
-                label="Apellidos"
-                type="text"
-                value={apellido}
-                onChange={handleApellido}
-                fullWidth
-                required
-              />
-              <TextField
-                label="Password"
-                type="password"
-                value={password}
-                onChange={handlePassword}
-                fullWidth
-                required
-              />
-              <Button type="submit" variant="contained" color="primary">
-                Registrar
-              </Button>
-            </Box>
-          </form>
-        </Paper>
-      </Container>
+      <Public>
+        <Container sx={{ p: "2rem" }}>
+          <Paper elevation={15} sx={{ width: "70%", margin: "0 auto" }}>
+            <form onSubmit={handleSubmit}>
+              <Box sx={{ flexGrow: 1, display: "grid", gap: 4, p: 3 }}>
+                <Typography variant="h4" textAlign="center" sx={{ my: 2 }}>
+                  Registro
+                </Typography>
+                <TextField
+                  label="Email"
+                  type="email"
+                  value={email}
+                  onChange={handleEmail}
+                  fullWidth
+                />
+                <TextField
+                  label="Nombre"
+                  type="text"
+                  value={nombre}
+                  onChange={handleNombre}
+                  fullWidth
+                />
+                <TextField
+                  label="Apellidos"
+                  type="text"
+                  value={apellido}
+                  onChange={handleApellido}
+                  fullWidth
+                />
+                <TextField
+                  label="Password"
+                  type="password"
+                  value={password}
+                  onChange={handlePassword}
+                  fullWidth
+                />
+                <Button type="submit" variant="contained" color="primary">
+                  Registrar
+                </Button>
+              </Box>
+            </form>
+          </Paper>
+        </Container>
+      </Public>
     </>
   );
 }

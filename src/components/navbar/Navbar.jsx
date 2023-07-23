@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
-import logo from "../../assets/img/navbar-logo.png"
+import logo from "../../assets/img/navbar-logo.png";
 import MenuIcon from "@mui/icons-material/Menu";
 
 import NavListDrawer from "./NavListDrawer";
@@ -21,42 +21,9 @@ import { AuthContext } from "../../context/AuthProvider";
 
 import { useNavigate } from "react-router-dom";
 
-
-
-const publicNavLinks = [
-  {
-    title: "Galeria",
-    path: "/gallery",
-  },
-  {
-    title: "Iniciar Sesion",
-    path: "/login",
-  },
-  {
-    title: "Registrarse",
-    path: "/register",
-  },
-];
-
-const privateNavLinks = [
-  {
-    title: "Galeria",
-    path: "/gallery",
-  },
-  {
-    title: "Perfil",
-
-    path: "/dashboard",
-  },
-  {
-    title: "Cerrar Sesion",
-    path: "/logout",
-  },
-];
 const activeStyle = {
   color: "#E8D5C4",
 };
-
 
 const activeLink = ({ isActive }) =>
   isActive ? activeStyle : { color: "#EEEEEE" };
@@ -64,10 +31,16 @@ const activeLink = ({ isActive }) =>
 export default function Navbar() {
   const [open, setOpen] = useState(false);
 
-  const { user, logout } = useContext(AuthContext)
+  const navLinks = [
+    { to: "/gallery", text: "Galeria", private: false },
+    { to: "/login", text: "Iniciar Sesion", private: false, publicOnly: true },
+    { to: "/register", text: "Regristarse", private: false, publicOnly: true },
+    { to: "/dashboard", text: "Perfil", private: true },
+  ];
 
-  const navLinks = !user ? publicNavLinks : privateNavLinks;
-  const navigate = useNavigate()
+  const { user, logout } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -82,7 +55,9 @@ export default function Navbar() {
               size="large"
               edge="start"
               aria-label="menu"
-              onClick={() => setOpen(true)}
+              onClick={() => {
+                !open ? setOpen(true) : setOpen(false);
+              }}
               sx={{ display: { xs: "flex", sm: "none" } }}
             >
               <MenuIcon />
@@ -96,29 +71,34 @@ export default function Navbar() {
               <img src={logo}></img>
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "flex" } }}>
-              {navLinks.map((item) => (item.path !== "/logout" ?
+              {navLinks.map((item) => {
+                if (item.private && !user) return null;
+                if (item.publicOnly && user) return null;
+                return (
+                  <Button
+                    color="inherit"
+                    key={item.text}
+                    component={NavLink}
+                    to={item.to}
+                    style={activeLink}
+                    sx={{ mx: "0.5rem" }}
+                  >
+                    {item.text}
+                  </Button>
+                );
+              })}
+              {user && (
                 <Button
                   color="inherit"
-                  key={item.title}
-                  component={NavLink}
-                  to={item.path}
-                  style={activeLink}
-                  sx={{ mx: "0.5rem" }}
-                >
-                  {item.title}
-                </Button> :
-                <Button
-                  color="inherit"
-                  key={item.title}
                   sx={{ mx: "0.5rem" }}
                   onClick={() => {
                     logout();
                     navigate("/");
                   }}
                 >
-                  {item.title}
+                  Cerrar Sesion
                 </Button>
-              ))}
+              )}
             </Box>
             <CartDrawer />
           </Toolbar>
@@ -129,9 +109,9 @@ export default function Navbar() {
         open={open}
         anchor="top"
         onClose={() => setOpen(false)}
-        sx={{ display: { xs: "block", sm: "none" }, height: 10 }}
+        sx={{ display: { xs: "block", sm: "none" }, height: 100 }}
       >
-        <NavListDrawer NavLinks={navLinks} />
+        <NavListDrawer navLinks={navLinks} />
       </Drawer>
     </>
   );

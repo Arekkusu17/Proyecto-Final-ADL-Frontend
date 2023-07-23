@@ -1,58 +1,87 @@
-import { Container } from "@mui/material";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { useContext } from "react";
+import { Container, Stack } from "@mui/material";
+import { Route, Routes } from "react-router-dom";
 
-import FavoritesProvider from "./context/FavoritesProvider"
 import { AuthContext } from "./context/AuthProvider";
+import SaleContextProvider from "./context/SaleContext";
+import CommentsProvider from "./context/CommentsProvider";
+import FavoritesProvider from "./context/FavoritesProvider";
 
 import Navbar from "./components/navbar/Navbar";
-import Footer from "./components/Footer";
-
+import PacmanLoader from "react-spinners/PacmanLoader";
+import { Private } from "./components/routesProtection/private";
 
 import Home from "./Pages/Home";
-import Gallery from "./Pages/Gallery";
 import Login from "./Pages/Login";
+import Gallery from "./Pages/Gallery";
 import Register from "./Pages/Register";
 import InfoClase from "./Pages/InfoClase";
 
-import Dashboard from "./pages/Dashboard"
-import Profile from "./pages/Profile"
-import EditProfile from "./pages/EditProfile"
-import Favorites from "./pages/Favorites"
-import CreatePost from "./pages/CreatePost"
-
-import { useContext } from "react";
+import Profile from "./Pages/Profile";
+import Dashboard from "./Pages/Dashboard";
+import Favorites from "./Pages/Favorites";
 import MyClasses from "./Pages/MyClasses";
-
+import CreatePost from "./Pages/CreatePost";
+import ModifyPost from "./Pages/ModifyPost";
+import EditProfile from "./Pages/EditProfile";
 
 
 export default function App() {
-  const { loading, user } = useContext(AuthContext);
-  // if (user === null) return <div>Loading...</div>;
+  const { user, loading } = useContext(AuthContext);
 
   return (
     <>
-      <Navbar />
-      <FavoritesProvider>
-
-        <Container color="primary" sx={{ p: { xs: '0' }, maxWidth: { xs: '100%' } }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/infoClase/:id" element={<InfoClase />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/profile"></Route>
-            <Route path="/cart"></Route>
-            <Route path="/login" element={!user & !loading ? <Login /> : <Navigate to="/dashboard" />} />
-            <Route path="/dashboard" element={user && !loading ? <Dashboard /> : <Navigate to="/login" />}>
-              <Route path="profile" element={<Profile />} />
-              <Route path="editprofile" element={<EditProfile />} />
-              <Route path="favorites" element={<Favorites />} />
-              <Route path="createpost" element={<CreatePost />} />
-              <Route path="classes" element={<MyClasses />} />
-            </Route>
-          </Routes>
-        </Container>
-      </FavoritesProvider>
+      <SaleContextProvider>
+        {!user && loading ? (
+          <Stack
+            justifyContent="center"
+            height="60vh"
+            alignItems="center"
+            gap="3rem"
+            sx={{ margin: "5rem auto" }}
+          >
+            <PacmanLoader color="#3A98B9" size={52} />
+          </Stack>
+        ) : (
+          <>
+            <Navbar />
+            <FavoritesProvider>
+              <CommentsProvider>
+                <Container
+                  color="primary"
+                  sx={{ p: { xs: "0" }, maxWidth: { xs: "100%" } }}
+                >
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/gallery" element={<Gallery />} />
+                    <Route path="/infoClase/:id" element={<InfoClase />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/profile"></Route>
+                    <Route path="/cart"></Route>
+                    <Route path="/login" element={<Login />} />
+                    <Route
+                      path="/dashboard"
+                      element={
+                        <Private>
+                          {" "}
+                          <Dashboard />{" "}
+                        </Private>
+                      }
+                    >
+                      <Route path="profile" element={<Profile />} />
+                      <Route path="editprofile" element={<EditProfile />} />
+                      <Route path="favorites" element={<Favorites />} />
+                      <Route path="createpost" element={<CreatePost />} />
+                      <Route path="modifypost/:id" element={<ModifyPost />} />
+                      <Route path="classes" element={<MyClasses />} />
+                    </Route>
+                  </Routes>
+                </Container>
+              </CommentsProvider>
+            </FavoritesProvider>
+          </>
+        )}
+      </SaleContextProvider>
     </>
   );
 }
