@@ -39,7 +39,6 @@ export default function CreatePost() {
       });
       const data = await res.json();
 
-      console.log("Creado!", data);
       data
         ? Swal.fire({
             icon: "success",

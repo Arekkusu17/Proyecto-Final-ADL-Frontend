@@ -27,7 +27,6 @@ export default function MyClasses() {
       });
 
       const data = await res.json();
-      console.log(data.result);
       setClases(data.result);
     } catch (error) {
       console.log(error);

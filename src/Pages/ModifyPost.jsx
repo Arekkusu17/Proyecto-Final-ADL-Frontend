@@ -1,6 +1,7 @@
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function ModifyPost() {
   const token = localStorage.getItem("token");
@@ -15,9 +16,8 @@ export default function ModifyPost() {
   });
 
   const [clases, setClases] = useState([]);
+  const navigate = useNavigate();
   const { id } = useParams();
-
-  console.log(id);
 
   const getClases = async () => {
     try {
@@ -25,7 +25,6 @@ export default function ModifyPost() {
         method: "GET",
       });
       const data = await res.json();
-      console.log(data.result);
       setClases(data.result);
     } catch (error) {
       console.log(error);
@@ -38,12 +37,18 @@ export default function ModifyPost() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { subject, name, price, level, description, schedule, img } =
-      newPostDetails;
-    console.log(subject);
+
+    const subject = newPostDetails.subject || clases.subject; // Usa clases.subject si newPostDetails.subject es vacío
+    const name = newPostDetails.name || clases.name;
+    const price = newPostDetails.price || clases.price;
+    const level = newPostDetails.level || clases.level;
+    const description = newPostDetails.description || clases.description;
+    const schedule = newPostDetails.schedule || clases.schedule;
+    const img = newPostDetails.img || clases.img;
+
     try {
-      const res = await fetch(import.meta.env.VITE_URL + "classes", {
-        method: "POST",
+      const res = await fetch(import.meta.env.VITE_URL + "classes/" + id, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
@@ -60,9 +65,25 @@ export default function ModifyPost() {
       });
       const data = await res.json();
 
-      console.log("Creado!", data);
+      if (data.ok) {
+        Swal.fire({
+          icon: "success",
+          title: "Has Modificado la Clase.",
+          confirmButtonText: "Aceptar",
+          didClose: () => {
+            navigate("/dashboard/classes");
+          },
+        });
+      } else {
+        throw data.error;
+      }
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Error al Eliminar la Clase.",
+        text: error,
+        confirmButtonText: "Aceptar",
+      });
     }
   };
 
@@ -80,11 +101,9 @@ export default function ModifyPost() {
         <Stack gap="1rem" direction="row">
           <TextField
             fullWidth
-            value={newPostDetails?.subject || clases.subject}
-            label="Asignatura"
+            value={newPostDetails?.subject || ""}
+            label={clases.subject}
             type="text"
-            placeholder="Asignatura..."
-            required
             onChange={(e) => {
               setNewPostDetails({ ...newPostDetails, subject: e.target.value });
             }}
@@ -92,10 +111,9 @@ export default function ModifyPost() {
           <TextField
             value={newPostDetails?.name || ""}
             fullWidth
-            label="Nombre"
+            label={clases.name}
             type="text"
             placeholder="Nombre de la publicación..."
-            required
             onChange={(e) => {
               setNewPostDetails({ ...newPostDetails, name: e.target.value });
             }}
@@ -105,10 +123,9 @@ export default function ModifyPost() {
           <TextField
             fullWidth
             value={newPostDetails?.price || ""}
-            label="Precio"
+            label={clases.price}
             type="number"
             placeholder="Precio..."
-            required
             onChange={(e) => {
               setNewPostDetails({ ...newPostDetails, price: e.target.value });
             }}
@@ -116,10 +133,9 @@ export default function ModifyPost() {
           <TextField
             fullWidth
             value={newPostDetails?.level || ""}
-            label="Nivel"
+            label={clases.level}
             type="text"
             placeholder="Nivel..."
-            required
             onChange={(e) => {
               setNewPostDetails({ ...newPostDetails, level: e.target.value });
             }}
@@ -129,10 +145,9 @@ export default function ModifyPost() {
           value={newPostDetails?.description || ""}
           multiline
           maxRows={5}
-          label="Descripcion"
+          label={clases.description}
           type="text"
           placeholder="Descripcion de la publicación..."
-          required
           onChange={(e) => {
             setNewPostDetails({
               ...newPostDetails,
@@ -142,20 +157,18 @@ export default function ModifyPost() {
         />
         <TextField
           value={newPostDetails?.schedule || ""}
-          label="Horario"
+          label={clases.schedule}
           type="text"
           placeholder="Días de clase..."
-          required
           onChange={(e) => {
             setNewPostDetails({ ...newPostDetails, schedule: e.target.value });
           }}
         />
         <TextField
           value={newPostDetails?.img || ""}
-          label="Link Imagen"
+          label={clases.img}
           type="text"
           placeholder="Enlace a la imagen de la publicación..."
-          required
           onChange={(e) => {
             setNewPostDetails({ ...newPostDetails, img: e.target.value });
           }}
@@ -166,7 +179,7 @@ export default function ModifyPost() {
           type="submit"
           sx={{ width: "100%" }}
         >
-          Crear Publicación
+          Modificar Publicación
         </Button>
       </Stack>
     </Container>
