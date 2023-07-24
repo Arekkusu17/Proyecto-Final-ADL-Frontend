@@ -3,6 +3,7 @@ import CommentsListItem from "./CommentsListItem"
 import { CommentsContext } from "../../Context/CommentsProvider"
 import NewComment from "./NewComment"
 
+
 export default function CommentsSection({ classId }) {
   const { comments, getClassComments, setComments } = useContext(CommentsContext)
   const [loadingComments, setLoadingComments] = useState(null)

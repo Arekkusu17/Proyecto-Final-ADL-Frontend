@@ -3,6 +3,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+
 export default function CreatePost() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -20,6 +23,7 @@ export default function CreatePost() {
     e.preventDefault();
     const { subject, name, price, level, description, schedule, img } =
       newPostDetails;
+
     try {
       const res = await fetch(import.meta.env.VITE_URL + "classes", {
         method: "POST",
@@ -49,6 +53,7 @@ export default function CreatePost() {
             },
           })
         : null;
+
     } catch (error) {
       console.log(error);
     }

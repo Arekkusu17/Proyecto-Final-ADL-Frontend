@@ -15,6 +15,9 @@ export default function Register() {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [password, setPassword] = useState("");
+  const [img_avatar, setImg_avatar] = useState("");
+
+
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -28,6 +31,9 @@ export default function Register() {
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
+  const handleImgAvatar = (e) => {
+    setImg_avatar(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,6 +43,7 @@ export default function Register() {
       lastName: apellido,
       email: email,
       password: password,
+      img_avatar: img_avatar
     };
 
     try {
@@ -101,6 +108,13 @@ export default function Register() {
                   type="text"
                   value={apellido}
                   onChange={handleApellido}
+                  fullWidth
+                />
+                <TextField
+                  label="Imagen de Avatar"
+                  type="text"
+                  value={img_avatar}
+                  onChange={handleImgAvatar}
                   fullWidth
                 />
                 <TextField

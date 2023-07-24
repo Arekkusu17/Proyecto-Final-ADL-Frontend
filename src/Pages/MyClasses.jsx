@@ -6,7 +6,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import MyClassListItem from "../components/myClasses/myClassListItem";
+
+import MyClassListItem from "../components/myClasses/MyClassListItem";
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
