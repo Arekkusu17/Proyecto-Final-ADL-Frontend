@@ -9,7 +9,7 @@ import FavoritesProvider from "./Context/FavoritesProvider";
 
 import Navbar from "./components/navbar/Navbar";
 import PacmanLoader from "react-spinners/PacmanLoader";
-import { Private } from "./components/routesProtection/private";
+import { Private } from "./components/routesProtection/Private";
 
 import Home from "./Pages/Home";
 import Login from "./Pages/Login";

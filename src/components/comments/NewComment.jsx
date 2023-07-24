@@ -52,7 +52,6 @@ export default function NewComment({ classId }) {
             <Stack>
               <Typography>¿Cómo evaluarías el servicio?</Typography>
               <Rating
-                name="simple-controlled"
                 value={newCommentsDetails.rating}
                 onChange={(event, newValue) => {
                   setNewCommentsDetails({ ...setNewCommentsDetails, rating: newValue });
@@ -67,7 +66,6 @@ export default function NewComment({ classId }) {
               type="text"
               placeholder="Deja tu comentario, de esta forma podrás ayudar a los demás usuarios ..."
               required
-              disabled
               onChange={(e) => {
                 setNewCommentsDetails({ ...newCommentsDetails, comment: e.target.value });
               }} />

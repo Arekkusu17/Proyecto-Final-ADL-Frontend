@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-import { Public } from "../components/routesProtection/public";
+import { Public } from "../components/routesProtection/Public";
 import Swal from "sweetalert2";
 
 export default function Register() {
@@ -15,6 +15,9 @@ export default function Register() {
   const [nombre, setNombre] = useState("");
   const [apellido, setApellido] = useState("");
   const [password, setPassword] = useState("");
+  const [img_avatar, setImg_avatar] = useState("");
+
+
 
   const handleEmail = (e) => {
     setEmail(e.target.value);
@@ -28,6 +31,9 @@ export default function Register() {
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
+  const handleImgAvatar = (e) => {
+    setImg_avatar(e.target.value);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -37,12 +43,11 @@ export default function Register() {
       lastName: apellido,
       email: email,
       password: password,
+      img_avatar: img_avatar
     };
 
     try {
-
       const response = await fetch(import.meta.env.VITE_URL + "users", {
-
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -103,6 +108,13 @@ export default function Register() {
                   type="text"
                   value={apellido}
                   onChange={handleApellido}
+                  fullWidth
+                />
+                <TextField
+                  label="Imagen de Avatar"
+                  type="text"
+                  value={img_avatar}
+                  onChange={handleImgAvatar}
                   fullWidth
                 />
                 <TextField
