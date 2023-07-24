@@ -3,9 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
-import { useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-
 export default function CreatePost() {
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
