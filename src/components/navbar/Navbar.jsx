@@ -35,7 +35,7 @@ export default function Navbar() {
     { to: "/gallery", text: "Galeria", private: false },
     { to: "/login", text: "Iniciar Sesion", private: false, publicOnly: true },
     { to: "/register", text: "Regristarse", private: false, publicOnly: true },
-    { to: "/dashboard", text: "Perfil", private: true },
+    { to: "/dashboard", text: "Dashboard", private: true },
   ];
 
   const { user, logout } = useContext(AuthContext);
