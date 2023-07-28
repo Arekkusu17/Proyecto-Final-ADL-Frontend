@@ -10,16 +10,11 @@ function Item(props) {
   return (
     <Box
       sx={{
-        bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#101010' : '#fff'),
-        color: (theme) => (theme.palette.mode === 'dark' ? 'grey.300' : 'grey.800'),
         border: '1px solid',
         borderColor: (theme) =>
           theme.palette.mode === 'dark' ? 'grey.800' : 'grey.300',
         p: 1,
         borderRadius: 2,
-        textAlign: 'center',
-        fontSize: '0.875rem',
-        fontWeight: '700',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -33,7 +28,7 @@ function Item(props) {
 
 export default function ProfileDashboard() {
 
-  const { user, userRating } = useContext(AuthContext);
+  const { userRating } = useContext(AuthContext);
   const { userClasses } = useContext(UserClassesContext)
   const { favorites } = useContext(FavoritesContext);
 
@@ -43,7 +38,7 @@ export default function ProfileDashboard() {
     <>
       <Box component={Paper} maxWidth="lg" variant="outlined" padding='1.5rem' >
         <Stack display='flex' textAlign='center' flexDirection='column' justifyContent='center'>
-          <Typography fontWeight='bold' variant="h3" >Bienvenido {user.name}</Typography>
+          <Typography fontWeight='bold' variant="h3" >Bienvenido</Typography>
           <Typography variant="h5">Resumen de tu cuenta:</Typography>
         </Stack>
         <Box
@@ -64,17 +59,14 @@ export default function ProfileDashboard() {
             <Typography variant="h4">{userRating}</Typography></Item>
           <Item sx={{ gridColumn: { xs: '1', sm: '1/4' } }}>
             <Typography variant="h5">Publicaciones Creadas</Typography>
-
             <Typography variant="h4">{userClasses.length}</Typography>
           </Item>
           <Item sx={{ gridColumn: { xs: '1', sm: '1/4' } }}>
             <Typography variant="h5">Publicaciones Favoritas</Typography>
-
             <Typography variant="h4">{favorites.length}</Typography>
           </Item>
         </Box>
-
-      </Box >
+      </Box>
     </>
   )
 }
