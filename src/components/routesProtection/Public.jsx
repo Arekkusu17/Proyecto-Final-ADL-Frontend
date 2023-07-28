@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { AuthContext } from '../../Context/AuthProvider';
 
 export const Public = ({ children }) => {
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
   if (user) {
     return <Navigate to="/dashboard" />;
   }

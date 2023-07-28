@@ -2,7 +2,7 @@ import { Box, Container, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import CardInfo from "../components/CardInfo";
-import PacmanLoader from "react-spinners/PacmanLoader";
+import Loader from "../components/Loader";
 
 export default function InfoClase() {
   const { id } = useParams();
@@ -27,28 +27,14 @@ export default function InfoClase() {
     getClase();
   }, []);
 
-  if (loading) {
-    return (
-      <Box
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-        }}
-      >
-        <Box textAlign="center">
-          <PacmanLoader color="#3A98B9" size={30} />
-        </Box>
-      </Box>
-    );
-  }
-
   return (
     <>
-      <Container sx={{ my: 4 }}>
-        <CardInfo clases={clases} />
-      </Container>
+      {loading ?
+        <Loader /> :
+        <Container sx={{ my: 4 }}>
+          <CardInfo clases={clases} />
+        </Container>}
+
     </>
   );
 }

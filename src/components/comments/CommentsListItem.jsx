@@ -21,5 +21,5 @@ export default function CommentsListItem({ commentItem }) {
         </Box>
       </Box>
     </>
-  )
+  );
 }

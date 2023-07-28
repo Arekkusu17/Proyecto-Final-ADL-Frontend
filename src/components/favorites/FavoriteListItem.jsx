@@ -14,16 +14,14 @@ import { FavoritesContext } from "../../Context/FavoritesProvider";
 
 
 export default function FavoriteListItem({ favoriteItem }) {
-  console.log(favoriteItem)
   const { total, agregarClase } = SaleUseContext();
   const { removeFromFavorites } = useContext(FavoritesContext);
 
-
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleViewProduct = (id) => {
     navigate(`/infoClase/${id}`)
-  }
+  };
 
   const handleAddToCart = (product) => {
     const newProduct = {
@@ -33,12 +31,12 @@ export default function FavoriteListItem({ favoriteItem }) {
       img: product.img,
       amount: 1,
     };
-    agregarClase(newProduct)
-  }
+    agregarClase(newProduct);
+  };
 
   const handleDeleteFavorite = (id) => {
-    removeFromFavorites(id)
-  }
+    removeFromFavorites(id);
+  };
 
   useEffect(() => { }, [total]);
 
@@ -68,6 +66,6 @@ export default function FavoriteListItem({ favoriteItem }) {
         </Stack>
       </Stack>
     </Box>
-  )
+  );
 }
 
