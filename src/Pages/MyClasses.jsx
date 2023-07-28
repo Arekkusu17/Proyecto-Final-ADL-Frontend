@@ -7,37 +7,39 @@ import {
   Typography,
 } from "@mui/material";
 import MyClassListItem from "../components/myClasses/MyClassListItem";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserClassesContext } from "../Context/UserClassesProvider";
 
 export default function MyClasses() {
-  const token = localStorage.getItem("token");
+  // const token = localStorage.getItem("token");
+  const { userClasses } = useContext(UserClassesContext)
 
-  const [clases, setClases] = useState([]);
+  // const [clases, setClases] = useState([]);
 
   const navigate = useNavigate();
 
-  const getClases = async () => {
-    try {
-      const res = await fetch(import.meta.env.VITE_URL + "classes/users", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+  // const getClases = async () => {
+  //   try {
+  //     const res = await fetch(import.meta.env.VITE_URL + "classes/users", {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     });
 
-      const data = await res.json();
-      setClases(data.result);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  //     const data = await res.json();
+  //     setClases(data.result);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getClases();
-  }, []);
+  // useEffect(() => {
+  //   getClases();
+  // }, []);
 
-  const listMyClasses = clases.map((clase) => {
+  const listMyClasses = userClasses.map((clase) => {
     return <MyClassListItem key={clase.id} myClassItem={clase} />;
   });
 
@@ -47,7 +49,7 @@ export default function MyClasses() {
         Mis Publicaciones
       </Typography>
       <Stack gap="1.5rem" mt="1rem">
-        {clases.length === 0 ? (
+        {userClasses.length === 0 ? (
           <Container>
             <Alert variant="outlined" severity="info">
               <AlertTitle>No has realizado publicaciones.</AlertTitle>
