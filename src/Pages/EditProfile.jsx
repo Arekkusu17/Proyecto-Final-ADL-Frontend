@@ -3,8 +3,6 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 
 export default function EditProfile() {
-  // TODO LA INFO DEL USER DEBE VENIR DE UN PROVIDER, EL MISMO QUE ES UTIL PARA LA VIEW PERFIL
-
   const { user, setUser } = useContext(AuthContext);
 
   const [userDetails, setUserDetails] = useState(user);

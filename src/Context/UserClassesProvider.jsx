@@ -4,7 +4,7 @@ import { AuthContext } from "./AuthProvider";
 export const UserClassesContext = React.createContext();
 
 const UserClassesProvider = ({ children }) => {
-  const { token } = useContext(AuthContext)
+  const { token } = useContext(AuthContext);
   const [userClasses, setUserClasses] = useState([]);
 
   const getClasses = async () => {
@@ -30,7 +30,7 @@ const UserClassesProvider = ({ children }) => {
     <UserClassesContext.Provider value={{ userClasses }}>
       {children}
     </UserClassesContext.Provider>
-  )
+  );
 
 }
 

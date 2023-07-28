@@ -5,10 +5,10 @@ import { AuthContext } from "./AuthProvider";
 export const FavoritesContext = React.createContext()
 
 const FavoritesProvider = ({ children }) => {
-  const { token } = useContext(AuthContext)
-  const [loadingFavorites, setLoadingFavorites] = useState(false)
+  const { token } = useContext(AuthContext);
+  const [loadingFavorites, setLoadingFavorites] = useState(false);
 
-  const [favorites, setFavorites] = useState([])
+  const [favorites, setFavorites] = useState([]);
 
   const getFavorites = async () => {
     try {
@@ -25,7 +25,7 @@ const FavoritesProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const removeFromFavorites = async (id) => {
     try {
@@ -41,7 +41,7 @@ const FavoritesProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   const addToFavorites = async (id) => {
     try {
@@ -61,7 +61,7 @@ const FavoritesProvider = ({ children }) => {
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 
   useEffect(() => {
     if (token) {
@@ -73,7 +73,7 @@ const FavoritesProvider = ({ children }) => {
     <FavoritesContext.Provider value={{ removeFromFavorites, addToFavorites, setLoadingFavorites, loadingFavorites, favorites, setFavorites, getFavorites }}>
       {children}
     </FavoritesContext.Provider>
-  )
+  );
 
 }
 

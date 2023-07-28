@@ -13,8 +13,10 @@ export default function NavListDrawer({ setOpen }) {
     { to: "/login", text: "Iniciar Sesion", private: false, publicOnly: true },
     { to: "/register", text: "Regristarse", private: false, publicOnly: true },
     { to: "/dashboard", text: "Perfil", private: true }
-  ]
-  const { user, logout } = useContext(AuthContext)
+  ];
+
+  const { user, logout } = useContext(AuthContext);
+
   return (
     <Box mt='1rem'>
       <nav>
@@ -46,5 +48,5 @@ export default function NavListDrawer({ setOpen }) {
         </List>
       </nav>
     </Box>
-  )
+  );
 }

@@ -46,7 +46,7 @@ export default function MenuCart() {
       <Box key={product.name}>
         <CartItemDrawer product={product} />
       </Box>)
-  })
+  });
 
   return (
     <div>

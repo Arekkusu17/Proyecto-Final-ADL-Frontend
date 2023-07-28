@@ -7,7 +7,7 @@ const initialStateToken = localStorage.getItem("token");
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [userRating, setUserRating] = useState(5)
+  const [userRating, setUserRating] = useState(0);
   const [token, setToken] = useState(initialStateToken);
   const [loading, setLoading] = useState(false);
 
@@ -38,9 +38,9 @@ const AuthProvider = ({ children }) => {
       const { userAvgRating } = await res.json();
       setUserRating(userAvgRating);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
 
   const saveToken = async (access_token) => {
@@ -65,7 +65,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
       getProfileUser(token);
-      getRatingUser(token)
+      getRatingUser(token);
     } else {
       setUser(false);
     }

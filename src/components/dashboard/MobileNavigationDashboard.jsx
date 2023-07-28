@@ -9,11 +9,11 @@ import LibraryBooksRoundedIcon from '@mui/icons-material/LibraryBooksRounded';
 
 export default function MobileNavigationDashboard() {
 
-  const [value, setValue] = useState("dashboard")
+  const [value, setValue] = useState("dashboard");
 
   const handleClick = (event, newValue) => {
     setValue(newValue);
-  }
+  };
 
   const activeStyle = {
     color: 'white',
@@ -92,7 +92,7 @@ export default function MobileNavigationDashboard() {
         />
       </BottomNavigation>
     </>
-  )
+  );
 
 }
 

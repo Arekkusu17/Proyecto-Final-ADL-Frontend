@@ -22,8 +22,7 @@ export default function SideBarNavigationDashboard() {
     { text: 'Mis Favoritos', path: 'favorites', icon: <FavoriteIcon /> },
     { text: 'Crear Publicación', path: 'createpost', icon: <LibraryAddRoundedIcon /> },
     { text: 'Mis Publicaciones', path: 'classes', icon: <LibraryBooksRoundedIcon /> }
-
-  ]
+  ];
 
   return (
     <>
@@ -59,5 +58,5 @@ export default function SideBarNavigationDashboard() {
         </Box>
       </Drawer>
     </>
-  )
+  );
 }

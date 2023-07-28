@@ -6,7 +6,7 @@ import Loader from "../components/Loader";
 
 export default function Gallery() {
   const [clases, setClases] = useState([]);
-  const [loadingClasses, setLoadingClasses] = useState(true)
+  const [loadingClasses, setLoadingClasses] = useState(true);
 
   const getClases = async () => {
     try {

@@ -4,7 +4,8 @@ import { AuthContext } from "../Context/AuthProvider";
 
 
 export default function Profile() {
-  const { user } = useContext(AuthContext)
+  const { user } = useContext(AuthContext);
+
   return (
     <Box component={Paper} maxWidth="md" variant="outlined" padding='1.5rem'>
       <Stack

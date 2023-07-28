@@ -13,5 +13,5 @@ export default function Loader() {
     >
       <PacmanLoader color="#3A98B9" size={52} />
     </Stack>
-  )
+  );
 }
