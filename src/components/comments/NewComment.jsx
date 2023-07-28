@@ -3,14 +3,14 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthProvider";
 
 export default function NewComment({ classId }) {
-  const [newCommentsDetails, setNewCommentsDetails] = useState({ rating: 0, comment: '' })
-  const { token } = useContext(AuthContext)
+  const [newCommentsDetails, setNewCommentsDetails] = useState({ rating: 0, comment: '' });
+  const { token } = useContext(AuthContext);
 
 
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
-    const { rating, comment } = newCommentsDetails
-    const id_classes = classId
+    const { rating, comment } = newCommentsDetails;
+    const id_classes = classId;
     try {
       const resComment = await fetch(import.meta.env.VITE_URL + `comments`, {
         method: "POST",
@@ -34,12 +34,9 @@ export default function NewComment({ classId }) {
           rating
         })
       });
-      const dataComment = await resComment.json();
-      const dataRating = await resRating.json();
-
-      console.log("Comentario enviado", dataComment, dataRating)
+      window.location.reload();
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   }
 
@@ -73,7 +70,6 @@ export default function NewComment({ classId }) {
           </Stack>
         </Container>
       }
-
     </>
-  )
+  );
 }
