@@ -12,8 +12,6 @@ export default function Favorites() {
 
   const { favorites } = useContext(FavoritesContext);
 
-  console.log(favorites)
-
   const listFavorites = favorites.map((favoriteItem) => {
     return (
       <FavoriteListItem key={favoriteItem.name} favoriteItem={favoriteItem} />
@@ -43,8 +41,6 @@ export default function Favorites() {
           </Container> : listFavorites}
 
       </Stack>
-
-
     </Container>
-  )
+  );
 }
