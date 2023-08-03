@@ -27,7 +27,7 @@ import EditProfile from "./Pages/EditProfile";
 import ProfileDashboard from "./Pages/ProfileDashboard";
 import UserClassesProvider from "./Context/UserClassesProvider";
 import NotFound from "./Pages/NotFound";
-
+import Sale from "./Pages/Sale";
 
 export default function App() {
   const { user, loading } = useContext(AuthContext);
@@ -70,6 +70,7 @@ export default function App() {
                         <Route path="createpost" element={<CreatePost />} />
                         <Route path="modifypost/:id" element={<ModifyPost />} />
                         <Route path="classes" element={<MyClasses />} />
+                        <Route path="sale" element={<Sale />} />
                       </Route>
                       <Route path="*" element={<NotFound />} />
                     </Routes>
