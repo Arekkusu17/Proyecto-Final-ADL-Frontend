@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { AuthContext } from "../Context/AuthProvider";
 import { FavoritesContext } from "../Context/FavoritesProvider";
 import { UserClassesContext } from "../Context/UserClassesProvider";
+import Loader from "../components/Loader";
 
 
 function Item(props) {
@@ -28,7 +29,7 @@ function Item(props) {
 
 export default function ProfileDashboard() {
 
-  const { userRating } = useContext(AuthContext);
+  const { userRating, loadingProfile } = useContext(AuthContext);
   const { userClasses } = useContext(UserClassesContext)
   const { favorites } = useContext(FavoritesContext);
 
@@ -36,7 +37,7 @@ export default function ProfileDashboard() {
 
   return (
     <>
-      <Box component={Paper} maxWidth="lg" variant="outlined" padding='1.5rem' >
+      {loadingProfile && userClasses && favorites ? <Loader /> : <Box component={Paper} maxWidth="lg" variant="outlined" padding='1.5rem' >
         <Stack display='flex' textAlign='center' flexDirection='column' justifyContent='center'>
           <Typography fontWeight='bold' variant="h3" >Bienvenido</Typography>
           <Typography variant="h5">Resumen de tu cuenta:</Typography>
@@ -66,7 +67,7 @@ export default function ProfileDashboard() {
             <Typography variant="h4">{favorites.length}</Typography>
           </Item>
         </Box>
-      </Box>
+      </Box>}
     </>
   )
 }
