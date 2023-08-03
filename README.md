@@ -17,18 +17,14 @@
     "react-spinners": "^0.13.8"
   }
   ```
-- Se utiliza React Router para la navegación entre ruta. It uses for the moment a fake api from platzi [Fake Api - Platzi](https://fakeapi.platzi.com/en/rest/auth-jwt). **Para probar la ruta de login, las credenciales son las siguientes**:
-  ```
-  email:     john@mail.com
-  password:  changeme 
-  ```
-
-  
-
 - Reutilizar componentes haciendo uso del paso de props y renderización dinámica.
 - Hacer uso de los hooks para un desarrollo ágil y reactivo.
 - Utilizar Context para el manejo del estado glob
 
+
+## Sitio
+  ### URL: 
+  Despliegue en Netlify [dotStudent](https://dotstudent.netlify.app)
 
 ## Integrantes
 
