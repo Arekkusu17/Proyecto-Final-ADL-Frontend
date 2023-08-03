@@ -1,4 +1,4 @@
-import { AppBar, Box, Typography, Container } from "@mui/material";
+import { AppBar, Box, Typography, Container, Stack } from "@mui/material";
 
 import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
@@ -21,33 +21,38 @@ export default function Footer() {
           color: "black",
         }}
       >
-        <Container sx={{ display: "flex", margin: "0 auto" }}>
-          <Box sx={{ flexGrow: 1, flexBasis: 0 }}>
-            <Typography variant="h5" sx={{ my: 4 }} fontWeight="bold">
-              <img src={logo}></img>
-            </Typography>
-            <Typography variant="tbody1" sx={{ pr: 4 }} textAlign="center">
-              Conecta, Aprende, Comparte: Tu plataforma segura para clases face
-              to face
-            </Typography>
-          </Box>
-          <Box sx={{ flexGrow: 1, flexBasis: 0 }} textAlign="center">
-            <Typography variant="h5" sx={{ my: 4 }} fontWeight="bold">
-              Contactanos
-            </Typography>
-            <Typography variant="tbody1">info@dotstudent.cl</Typography>
-          </Box>
-          <Box sx={{ flexGrow: 1, flexBasis: 0 }} textAlign="right">
-            <Typography variant="h5" sx={{ my: 4 }} fontWeight="bold">
-              Siguenos
-            </Typography>
-            <Box sx={{ ml: 1 }}>
-              <FacebookIcon />
-              <LinkedInIcon />
-              <InstagramIcon />
-              <TwitterIcon />
+        <Container sx={{ display: "flex", flexWrap: 'wrap', margin: "0 auto", flexDirection: 'row', justifyContent: { xs: 'space-between', sm: 'space-between' } }}>
+          <Stack>
+            <Box sx={{ flexGrow: 1, flexBasis: 0 }}>
+              <Typography variant="h5" sx={{ my: 4 }} fontWeight="bold">
+                <img src={logo}></img>
+              </Typography>
+              <Typography variant="tbody1" sx={{ pr: 4 }} textAlign="center">
+                Conecta, Aprende, Comparte: Tu plataforma segura para clases face
+                to face
+              </Typography>
+
             </Box>
-          </Box>
+          </Stack>
+          <Stack flexDirection='row' sx={{ gap: { xs: '5rem' } }}>
+            <Box sx={{ flexGrow: 1, flexBasis: 0, textAlign: { xs: 'left', sm: 'center' } }}>
+              <Typography variant="h5" sx={{ my: 4 }} fontWeight="bold">
+                Contactanos
+              </Typography>
+              <Typography variant="tbody1">info@dotstudent.cl</Typography>
+            </Box>
+            <Box sx={{ flexGrow: 1, flexBasis: 0, textAlign: { xs: 'left', sm: 'right' } }}>
+              <Typography variant="h5" sx={{ my: 4 }} fontWeight="bold">
+                Siguenos
+              </Typography>
+              <Box sx={{ ml: 1 }}>
+                <FacebookIcon />
+                <LinkedInIcon />
+                <InstagramIcon />
+                <TwitterIcon />
+              </Box>
+            </Box>
+          </Stack>
         </Container>
       </AppBar>
     </>
