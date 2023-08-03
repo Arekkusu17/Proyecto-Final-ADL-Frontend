@@ -85,7 +85,7 @@ export default function ModifyPost() {
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Error al Eliminar la Clase.",
+        title: "Error al Modificar la Clase.",
         text: error,
         confirmButtonText: "Aceptar",
       });

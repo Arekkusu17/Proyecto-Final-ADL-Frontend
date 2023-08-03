@@ -9,14 +9,18 @@ import {
 
 import MyClassListItem from "../components/myClasses/MyClassListItem";
 
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { UserClassesContext } from "../Context/UserClassesProvider";
 
 export default function MyClasses() {
-  const { userClasses } = useContext(UserClassesContext)
+  const { userClasses, getClasses } = useContext(UserClassesContext)
   const navigate = useNavigate();
+
+  useEffect(() => {
+    getClasses();
+  }, []);
 
 
   const listMyClasses = userClasses.map((clase) => {

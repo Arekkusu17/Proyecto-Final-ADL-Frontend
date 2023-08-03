@@ -22,9 +22,7 @@ const UserClassesProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    getClasses();
-  }, []);
+
 
   return (
     <UserClassesContext.Provider value={{ userClasses, getClasses }}>
