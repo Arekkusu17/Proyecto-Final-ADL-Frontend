@@ -17,10 +17,10 @@ import { KeyboardArrowRight } from "@mui/icons-material";
 import { NavLink } from "react-router-dom";
 import { SaleUseContext } from "../../Context/SaleContext";
 
-
 export default function MenuCart() {
   const [openMenuCart, setopenMenuCart] = useState(false);
   const { total } = SaleUseContext();
+  const token = localStorage.getItem("token");
 
   const data = JSON.parse(localStorage.getItem("product"));
   let totalAmount = 0;
@@ -45,12 +45,19 @@ export default function MenuCart() {
     return (
       <Box key={product.name}>
         <CartItemDrawer product={product} />
-      </Box>)
+      </Box>
+    );
   });
 
   return (
     <div>
-      <IconButton color="inherit" aria-label="" onClick={() => { openMenuCart ? handleCloseDrawerCart() : handleOpenDrawerCart() }}>
+      <IconButton
+        color="inherit"
+        aria-label=""
+        onClick={() => {
+          openMenuCart ? handleCloseDrawerCart() : handleOpenDrawerCart();
+        }}
+      >
         <Badge badgeContent={totalAmount} color="warning">
           <ShoppingCartIcon />
         </Badge>
@@ -71,18 +78,23 @@ export default function MenuCart() {
         }}
       >
         <Toolbar />
-        <Container >
-          <Typography mt='1.5rem' variant="h5" sx={{ mb: 3 }}>
+        <Container>
+          <Typography mt="1.5rem" variant="h5" sx={{ mb: 3 }}>
             Carro de Compra
           </Typography>
-          {total > 0 ? listCartItems :
-            <Container maxWidth='xs'>
+          {total > 0 ? (
+            listCartItems
+          ) : (
+            <Container maxWidth="xs">
               <Alert variant="outlined" severity="info">
                 <AlertTitle>Carro Vacío</AlertTitle>
-                <Typography >Actualmente tu carro no contiene productos. <strong>¡Te invitamos a revisar nuestra galería!</strong>
+                <Typography>
+                  Actualmente tu carro no contiene productos.{" "}
+                  <strong>¡Te invitamos a revisar nuestra galería!</strong>
                 </Typography>
               </Alert>
-            </Container>}
+            </Container>
+          )}
           <Box sx={{ display: "flex", justifyContent: "space-between" }}>
             <Typography variant="h5" sx={{ mt: 3 }}>
               Total
@@ -96,9 +108,9 @@ export default function MenuCart() {
             variant="contained"
             endIcon={<KeyboardArrowRight />}
             color="success"
-            disabled
+            disabled={!token}
             component={NavLink}
-            to="/cart"
+            to="/dashboard/sale"
             onClick={handleCloseDrawerCart}
             sx={{ width: "100%", mt: 3 }}
           >
