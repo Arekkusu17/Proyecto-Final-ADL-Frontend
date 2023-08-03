@@ -1,9 +1,12 @@
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
 import { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthProvider";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 export default function EditProfile() {
   const { user, setUser } = useContext(AuthContext);
+  const navigate = useNavigate()
 
   const [userDetails, setUserDetails] = useState(user);
 
@@ -28,6 +31,16 @@ export default function EditProfile() {
 
       setUser(result)
 
+      if (result) {
+        Swal.fire({
+          icon: "success",
+          title: "Has Modificado tu Perfil.",
+          confirmButtonText: "Aceptar",
+          didClose: () => {
+            navigate("/dashboard/profile");
+          },
+        });
+      }
     } catch (error) {
       console.log(error);
     }
