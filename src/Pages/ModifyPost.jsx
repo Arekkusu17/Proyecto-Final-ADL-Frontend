@@ -1,7 +1,9 @@
 import { Button, Container, Stack, TextField, Typography } from "@mui/material";
+import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Swal from "sweetalert2";
+import { UserClassesContext } from "../Context/UserClassesProvider";
 
 export default function ModifyPost() {
   const token = localStorage.getItem("token");
@@ -34,6 +36,8 @@ export default function ModifyPost() {
   useEffect(() => {
     getClases();
   }, []);
+
+  const { getClasses } = useContext(UserClassesContext)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,6 +75,7 @@ export default function ModifyPost() {
           title: "Has Modificado la Clase.",
           confirmButtonText: "Aceptar",
           didClose: () => {
+            getClasses();
             navigate("/dashboard/classes");
           },
         });
