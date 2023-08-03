@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
   const [userRating, setUserRating] = useState(0);
   const [token, setToken] = useState(initialStateToken);
   const [loading, setLoading] = useState(false);
+  const [loadingProfile, setLoadingProfile] = useState(false);
 
   const getProfileUser = async (access_token) => {
     try {
@@ -64,8 +65,10 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
+      setLoadingProfile(true)
       getProfileUser(token);
       getRatingUser(token);
+      setLoadingProfile(false)
     } else {
       setUser(false);
     }
@@ -80,6 +83,7 @@ const AuthProvider = ({ children }) => {
         token,
         getProfileUser,
         userRating,
+        loadingProfile,
         logout,
         loading,
       }}
