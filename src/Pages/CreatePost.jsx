@@ -42,13 +42,13 @@ export default function CreatePost() {
 
       data
         ? Swal.fire({
-            icon: "success",
-            title: "Clase Registrada con Exito",
-            confirmButtonText: "Aceptar",
-            didClose: () => {
-              navigate("/dashboard/classes");
-            },
-          })
+          icon: "success",
+          title: "Clase Registrada con Exito",
+          confirmButtonText: "Aceptar",
+          didClose: () => {
+            navigate("/dashboard/classes");
+          },
+        })
         : null;
 
     } catch (error) {
@@ -119,6 +119,7 @@ export default function CreatePost() {
           value={newPostDetails?.description || ""}
           multiline
           maxRows={5}
+          inputProps={{ maxLength: 149 }}
           label="Descripcion"
           type="text"
           placeholder="Descripcion de la publicación..."

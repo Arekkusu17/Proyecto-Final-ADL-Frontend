@@ -15,7 +15,7 @@ export default function CartItemDrawer({ product }) {
           src={product.img}
         />
         <Box alignItems="left">
-          <Typography fontWeight="bold">{product.name}</Typography>
+          <Typography textTransform='capitalize' fontWeight="bold">{product.name}</Typography>
         </Box>
         <Box
           sx={{

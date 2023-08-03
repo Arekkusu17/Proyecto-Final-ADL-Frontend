@@ -27,7 +27,7 @@ const UserClassesProvider = ({ children }) => {
   }, []);
 
   return (
-    <UserClassesContext.Provider value={{ userClasses }}>
+    <UserClassesContext.Provider value={{ userClasses, getClasses }}>
       {children}
     </UserClassesContext.Provider>
   );

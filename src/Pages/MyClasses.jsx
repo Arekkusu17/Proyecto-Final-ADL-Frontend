@@ -9,38 +9,15 @@ import {
 
 import MyClassListItem from "../components/myClasses/MyClassListItem";
 
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { UserClassesContext } from "../Context/UserClassesProvider";
 
 export default function MyClasses() {
-  // const token = localStorage.getItem("token");
   const { userClasses } = useContext(UserClassesContext)
-
-  // const [clases, setClases] = useState([]);
-
   const navigate = useNavigate();
 
-  // const getClases = async () => {
-  //   try {
-  //     const res = await fetch(import.meta.env.VITE_URL + "classes/users", {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     });
-
-  //     const data = await res.json();
-  //     setClases(data.result);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getClases();
-  // }, []);
 
   const listMyClasses = userClasses.map((clase) => {
     return <MyClassListItem key={clase.id} myClassItem={clase} />;

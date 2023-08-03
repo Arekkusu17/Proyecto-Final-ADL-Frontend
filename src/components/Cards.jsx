@@ -37,10 +37,10 @@ export default function Cards({ clase }) {
             }}
           >
             <Box>
-              <Typography variant="h5" component="div">
+              <Typography textTransform='capitalize' variant="h5" component="div">
                 {name}
               </Typography>
-              <Typography variant="body1">{description}</Typography>
+              <Typography variant="body1">{description.charAt(0).toUpperCase() + description.slice(1)}</Typography>
             </Box>
             <Box>
               <Typography

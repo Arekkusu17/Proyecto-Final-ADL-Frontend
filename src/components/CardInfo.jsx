@@ -119,15 +119,16 @@ export default function CardInfo({ clases }) {
                 variant="subtitle1"
                 color="text.secondary"
                 component="div"
+                textTransform='capitalize'
               >
                 {subject}
               </Typography>
-              <Typography>
+              <Typography textTransform='capitalize'>
                 {" "}
                 Nivel: <strong>{level}</strong>{" "}
               </Typography>
 
-              <Typography fontWeight="bold"> Horarios: {schedule} </Typography>
+              <Typography textTransform='capitalize' fontWeight="bold"> Horarios: {schedule} </Typography>
 
               <Typography fontWeight="bold" sx={{ mt: 3 }}>
                 Descripcion:{" "}
