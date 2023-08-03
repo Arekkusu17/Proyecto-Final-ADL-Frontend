@@ -27,7 +27,7 @@ export default function ModifyPost() {
         method: "GET",
       });
       const data = await res.json();
-      setClases(data.result);
+      setNewPostDetails(data.result);
     } catch (error) {
       console.log(error);
     }
@@ -107,7 +107,7 @@ export default function ModifyPost() {
           <TextField
             fullWidth
             value={newPostDetails?.subject || ""}
-            label={clases.subject}
+            label="Asignatura"
             type="text"
             onChange={(e) => {
               setNewPostDetails({ ...newPostDetails, subject: e.target.value });
@@ -116,7 +116,7 @@ export default function ModifyPost() {
           <TextField
             value={newPostDetails?.name || ""}
             fullWidth
-            label={clases.name}
+            label="Nombre"
             type="text"
             placeholder="Nombre de la publicación..."
             onChange={(e) => {
@@ -128,7 +128,7 @@ export default function ModifyPost() {
           <TextField
             fullWidth
             value={newPostDetails?.price || ""}
-            label={clases.price}
+            label="Precio"
             type="number"
             placeholder="Precio..."
             onChange={(e) => {
@@ -138,7 +138,7 @@ export default function ModifyPost() {
           <TextField
             fullWidth
             value={newPostDetails?.level || ""}
-            label={clases.level}
+            label="Nivel"
             type="text"
             placeholder="Nivel..."
             onChange={(e) => {
@@ -150,7 +150,7 @@ export default function ModifyPost() {
           value={newPostDetails?.description || ""}
           multiline
           maxRows={5}
-          label={clases.description}
+          label="Descripción"
           type="text"
           placeholder="Descripcion de la publicación..."
           onChange={(e) => {
@@ -162,7 +162,7 @@ export default function ModifyPost() {
         />
         <TextField
           value={newPostDetails?.schedule || ""}
-          label={clases.schedule}
+          label="Horario"
           type="text"
           placeholder="Días de clase..."
           onChange={(e) => {
@@ -171,7 +171,7 @@ export default function ModifyPost() {
         />
         <TextField
           value={newPostDetails?.img || ""}
-          label={clases.img}
+          label="Link Imagen"
           type="text"
           placeholder="Enlace a la imagen de la publicación..."
           onChange={(e) => {
