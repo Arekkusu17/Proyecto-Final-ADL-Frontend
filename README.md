@@ -24,8 +24,8 @@
 
 ## Sitio
   ### URL: 
-  Despliegue en Netlify [dotStudent](https://dotstudent.netlify.app)
-  Repositorio Backedn [dotStudent-Backend](https://github.com/Dlorcav77/Proyecto-Final-BackEnd)
+  - Despliegue en Netlify [dotStudent](https://dotstudent.netlify.app).
+  - Repositorio Backedn [dotStudent-Backend](https://github.com/Dlorcav77/Proyecto-Final-BackEnd)
 
 ## Integrantes
 
